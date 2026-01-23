@@ -122,9 +122,9 @@ const Projects = () => {
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 flex items-center gap-2 border ${activeFilter === filter
-                ? 'bg-[--color-accent] text-white border-[--color-accent] shadow-lg shadow-indigo-500/30 ring-2 ring-indigo-500/20'
-                : 'bg-white dark:bg-white/5 text-[--color-text-muted] border-2 border-gray-100 dark:border-[--color-border-custom] hover:border-[--color-accent] hover:text-[--color-accent] shadow-sm hover:shadow-md hover:-translate-y-0.5'
+              className={`px-5 py-2 rounded-full text-sm font-bold flex items-center gap-2 ${activeFilter === filter
+                ? 'btn-filter-active'
+                : 'btn-filter-inactive'
                 }`}
             >
               {activeFilter === filter && <FaFilter size={10} />}
