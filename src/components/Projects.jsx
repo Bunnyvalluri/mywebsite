@@ -124,7 +124,7 @@ const Projects = () => {
               onClick={() => setActiveFilter(filter)}
               className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 flex items-center gap-2 border ${activeFilter === filter
                 ? 'bg-[--color-accent] text-white border-[--color-accent] shadow-lg shadow-indigo-500/30 ring-2 ring-indigo-500/20'
-                : 'bg-white/80 dark:bg-white/5 backdrop-blur-md text-[--color-text-muted] border border-[--color-border-custom] hover:border-[--color-accent] hover:text-[--color-primary] shadow-sm'
+                : 'bg-slate-200 dark:bg-white/5 text-slate-700 dark:text-[--color-text-muted] border border-slate-300 dark:border-[--color-border-custom] hover:bg-slate-300 dark:hover:bg-white/10 hover:text-slate-900 shadow-sm'
                 }`}
             >
               {activeFilter === filter && <FaFilter size={10} />}
