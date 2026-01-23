@@ -42,6 +42,23 @@ const Header = ({ darkMode, toggleTheme }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Custom smooth scroll handler
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    setIsOpen(false);
+
+    const targetId = href.substring(1);
+    const element = document.getElementById(targetId);
+
+    if (element) {
+      const offsetTop = element.offsetTop;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <header className={`fixed top-0 w-full z-[9999] transition-all duration-500 ${scrolled || isOpen
       ? 'glass-strong shadow-lg shadow-black/5'
@@ -56,7 +73,11 @@ const Header = ({ darkMode, toggleTheme }) => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <a href="#home" className="group flex items-center gap-2">
+            <a
+              href="#home"
+              className="group flex items-center gap-2"
+              onClick={(e) => handleNavClick(e, '#home')}
+            >
               <span className="font-black text-2xl text-[--color-primary] tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
                 VALLURI <span className="gradient-text">RAHUL</span>
               </span>
@@ -72,10 +93,11 @@ const Header = ({ darkMode, toggleTheme }) => {
                 <motion.a
                   key={link.name}
                   href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}
-                  className={`relative px-4 py-2 font-medium text-sm transition-all duration-300 rounded-lg ${isActive
+                  className={`relative px-4 py-2 font-medium text-sm transition-all duration-300 rounded-lg cursor-pointer ${isActive
                     ? 'text-[--color-accent]'
                     : 'text-[--color-secondary] hover:text-[--color-primary]'
                     }`}
@@ -163,7 +185,7 @@ const Header = ({ darkMode, toggleTheme }) => {
                       transition={{ delay: index * 0.1 }}
                       key={link.name}
                       href={link.href}
-                      onClick={() => setIsOpen(false)}
+                      onClick={(e) => handleNavClick(e, link.href)}
                       className={`block px-4 py-4 rounded-xl text-lg font-medium transition-all ${isActive
                         ? 'bg-[--color-accent]/10 text-[--color-accent]'
                         : 'text-[--color-text-main] hover:bg-[--color-surface]'
