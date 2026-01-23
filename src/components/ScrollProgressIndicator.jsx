@@ -1,22 +1,33 @@
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { motion, useScroll, useSpring, useTransform, useMotionValueEvent } from 'framer-motion';
+import { useState } from 'react';
 
 const ScrollProgressIndicator = () => {
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [showButton, setShowButton] = useState(false);
+  const [percentage, setPercentage] = useState(0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (window.scrollY / totalHeight) * 100;
-      setScrollProgress(progress);
-    };
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
-    // Initial call
-    handleScroll();
+  // Optimize state updates to avoid re-renders on every scroll tick
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const val = Math.round(latest * 100);
+    if (val !== percentage) {
+      setPercentage(val);
+    }
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    if (latest > 0.2 && !showButton) {
+      setShowButton(true);
+    } else if (latest <= 0.2 && showButton) {
+      setShowButton(false);
+    }
+  });
+
+  const circumference = 2 * Math.PI * 20;
+  const strokeDashoffset = useTransform(scaleX, [0, 1], [circumference, 0]);
 
   return (
     <>
@@ -24,11 +35,7 @@ const ScrollProgressIndicator = () => {
       <div className="fixed top-0 left-0 right-0 h-1 bg-[--color-surface]/30 z-[9998]">
         <motion.div
           className="h-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 origin-left shadow-lg shadow-purple-500/50"
-          style={{
-            width: `${scrollProgress}%`,
-            transition: 'width 0.1s ease-out'
-          }}
-          initial={{ width: 0 }}
+          style={{ scaleX }}
         >
           {/* Shimmer Effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
@@ -63,12 +70,8 @@ const ScrollProgressIndicator = () => {
               strokeWidth="3"
               fill="none"
               strokeLinecap="round"
-              strokeDasharray={`${2 * Math.PI * 20}`}
-              strokeDashoffset={`${2 * Math.PI * 20 * (1 - scrollProgress / 100)}`}
-              style={{
-                transition: 'stroke-dashoffset 0.15s ease-out',
-                filter: 'drop-shadow(0 0 6px rgba(168, 85, 247, 0.5))'
-              }}
+              strokeDasharray={`${circumference}`}
+              style={{ strokeDashoffset }}
             />
             <defs>
               <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -81,7 +84,7 @@ const ScrollProgressIndicator = () => {
 
           {/* Center Content */}
           <div className="absolute inset-0 flex items-center justify-center">
-            {scrollProgress > 20 ? (
+            {showButton ? (
               // Scroll to Top Button
               <motion.button
                 initial={{ scale: 0 }}
@@ -109,7 +112,7 @@ const ScrollProgressIndicator = () => {
                 animate={{ opacity: 1 }}
                 className="text-xs font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"
               >
-                {Math.round(scrollProgress)}%
+                {percentage}%
               </motion.span>
             )}
           </div>

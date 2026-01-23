@@ -17,30 +17,46 @@ const Header = ({ darkMode, toggleTheme }) => {
     { name: 'Contact', href: '#contact' },
   ];
 
-  // Scroll detection
+  // Scroll detection with throttling
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 50);
 
-      // Active section detection
-      const sections = links.map(link => link.href.substring(1));
-      const scrollPosition = window.scrollY + 100;
+          // Active section detection
+          const scrollPosition = window.scrollY + 100;
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
+          // Find the active section
+          let currentSection = 'home';
+          for (const link of links) {
+            const sectionId = link.href.substring(1);
+            const element = document.getElementById(sectionId);
+            if (element) {
+              const { offsetTop, offsetHeight } = element;
+              if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                currentSection = sectionId;
+                break;
+              }
+            }
           }
-        }
+
+          if (currentSection !== activeSection) {
+            setActiveSection(currentSection);
+          }
+
+          ticking = false;
+        });
+
+        ticking = true;
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [activeSection]);
 
   // Custom smooth scroll handler
   const handleNavClick = (e, href) => {
