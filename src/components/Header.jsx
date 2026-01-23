@@ -43,7 +43,7 @@ const Header = ({ darkMode, toggleTheme }) => {
   }, []);
 
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled
+    <header className={`fixed top-0 w-full z-[100] transition-all duration-500 ${scrolled || isOpen
       ? 'glass-strong shadow-lg shadow-black/5'
       : 'bg-transparent'
       }`}>
@@ -123,10 +123,20 @@ const Header = ({ darkMode, toggleTheme }) => {
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-3 rounded-xl glass hover:glass-strong text-[--color-primary] transition-all"
+              className="p-3 rounded-xl glass hover:glass-strong text-[--color-primary] transition-all relative z-50"
               aria-label="Toggle menu"
             >
-              {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={isOpen ? "close" : "open"}
+                  initial={{ opacity: 0, rotate: -90 }}
+                  animate={{ opacity: 1, rotate: 0 }}
+                  exit={{ opacity: 0, rotate: 90 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+                </motion.div>
+              </AnimatePresence>
             </button>
           </div>
         </div>
@@ -137,27 +147,33 @@ const Header = ({ darkMode, toggleTheme }) => {
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: '100vh' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-strong border-t border-[--color-border-custom] overflow-hidden"
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="md:hidden glass-strong border-t border-[--color-border-custom] overflow-hidden absolute top-20 left-0 right-0"
           >
-            <div className="px-4 pt-4 pb-6 space-y-2 max-w-7xl mx-auto">
-              {links.map((link) => {
-                const isActive = activeSection === link.href.substring(1);
-                return (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`block px-4 py-3 rounded-xl text-base font-medium transition-all ${isActive
-                      ? 'bg-[--color-accent]/10 text-[--color-accent]'
-                      : 'text-[--color-text-main] hover:bg-[--color-surface]'
-                      }`}
-                  >
-                    {link.name}
-                  </a>
-                );
-              })}
+            <div className="flex flex-col h-full overflow-y-auto pb-32">
+              <div className="px-4 pt-4 pb-6 space-y-2 max-w-7xl mx-auto w-full">
+                {links.map((link, index) => {
+                  const isActive = activeSection === link.href.substring(1);
+                  return (
+                    <motion.a
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      key={link.name}
+                      href={link.href}
+                      onClick={() => setIsOpen(false)}
+                      className={`block px-4 py-4 rounded-xl text-lg font-medium transition-all ${isActive
+                        ? 'bg-[--color-accent]/10 text-[--color-accent]'
+                        : 'text-[--color-text-main] hover:bg-[--color-surface]'
+                        }`}
+                    >
+                      {link.name}
+                    </motion.a>
+                  );
+                })}
+              </div>
             </div>
           </motion.div>
         )}
