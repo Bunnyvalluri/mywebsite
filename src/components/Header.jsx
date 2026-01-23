@@ -43,7 +43,7 @@ const Header = ({ darkMode, toggleTheme }) => {
   }, []);
 
   return (
-    <header className={`fixed top-0 w-full z-[100] transition-all duration-500 ${scrolled || isOpen
+    <header className={`fixed top-0 w-full z-[9999] transition-all duration-500 ${scrolled || isOpen
       ? 'glass-strong shadow-lg shadow-black/5'
       : 'bg-transparent'
       }`}>
@@ -147,12 +147,12 @@ const Header = ({ darkMode, toggleTheme }) => {
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: '100vh' }}
+            animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="md:hidden glass-strong border-t border-[--color-border-custom] overflow-hidden absolute top-20 left-0 right-0"
+            className="md:hidden fixed top-20 left-0 right-0 bottom-0 bg-[--color-background-custom] border-t border-[--color-border-custom] overflow-hidden z-[9999]"
           >
-            <div className="flex flex-col h-full overflow-y-auto pb-32">
+            <div className="flex flex-col h-full overflow-y-auto pb-32 bg-[--color-surface]/50 backdrop-blur-xl">
               <div className="px-4 pt-4 pb-6 space-y-2 max-w-7xl mx-auto w-full">
                 {links.map((link, index) => {
                   const isActive = activeSection === link.href.substring(1);
