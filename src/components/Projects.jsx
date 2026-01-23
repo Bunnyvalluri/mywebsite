@@ -123,8 +123,8 @@ const Projects = () => {
               key={filter}
               onClick={() => setActiveFilter(filter)}
               className={`px-5 py-2 rounded-full text-sm font-bold transition-all duration-300 flex items-center gap-2 border ${activeFilter === filter
-                  ? 'bg-[--color-accent] text-white border-[--color-accent] shadow-lg shadow-indigo-500/30 ring-2 ring-indigo-500/20'
-                  : 'glass text-[--color-text-muted] border-[--color-border-custom] hover:border-[--color-accent] hover:text-[--color-primary]'
+                ? 'bg-[--color-accent] text-white border-[--color-accent] shadow-lg shadow-indigo-500/30 ring-2 ring-indigo-500/20'
+                : 'bg-white/80 dark:bg-white/5 backdrop-blur-md text-[--color-text-muted] border border-[--color-border-custom] hover:border-[--color-accent] hover:text-[--color-primary] shadow-sm'
                 }`}
             >
               {activeFilter === filter && <FaFilter size={10} />}
