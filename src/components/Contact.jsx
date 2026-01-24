@@ -12,25 +12,37 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Construct Mailto Link
-    const { name, email, subject, message } = formData;
-    const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
-    const mailtoLink = `mailto:codewithrahul23@gmail.com?subject=${encodeURIComponent(subject || 'Portfolio Contact')}&body=${body}`;
+    try {
+      const response = await fetch('https://formspree.io/f/k3yenXQTNRoEEh6w6j4IXOXk', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message
+        })
+      });
 
-    // Simulate sending delay for effect
-    setTimeout(() => {
-      window.location.href = mailtoLink;
+      if (response.ok) {
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setShowPopup(true);
+        setTimeout(() => setShowPopup(false), 5000);
+      } else {
+        alert('There was an issue sending your message. Please try again.');
+      }
+    } catch (error) {
+      alert('An expected error occurred. Please try again later.');
+      console.error('Submission error:', error);
+    } finally {
       setIsSubmitting(false);
-      setShowPopup(true);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-
-      // Auto close popup
-      setTimeout(() => setShowPopup(false), 5000);
-    }, 1000);
+    }
   };
 
   const handleChange = (e) => {
