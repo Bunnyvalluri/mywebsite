@@ -17,10 +17,12 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('https://formspree.io/f/k3yenXQTNRoEEh6w6j4IXOXk', {
+      // Append ?_redirect=false to prevent Formspark from redirecting to their success page
+      const response = await fetch('https://submit-form.com/RRB6NqsxA?_redirect=false', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({
           name: formData.name,
@@ -35,10 +37,12 @@ const Contact = () => {
         setShowPopup(true);
         setTimeout(() => setShowPopup(false), 5000);
       } else {
+        const data = await response.json().catch(() => ({}));
+        console.error('Submission error:', data);
         alert('There was an issue sending your message. Please try again.');
       }
     } catch (error) {
-      alert('An expected error occurred. Please try again later.');
+      alert('Network error. Please try again later.');
       console.error('Submission error:', error);
     } finally {
       setIsSubmitting(false);
@@ -230,7 +234,7 @@ const Contact = () => {
             </div>
             <div>
               <h4 className="font-bold text-[--color-primary]">Message Sent!</h4>
-              <p className="text-sm text-[--color-secondary]">Redirecting to email client...</p>
+              <p className="text-sm text-[--color-secondary]">Thanks for reaching out! I'll get back to you soon.</p>
             </div>
             <button
               onClick={() => setShowPopup(false)}
