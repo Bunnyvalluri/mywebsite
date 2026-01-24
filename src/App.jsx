@@ -53,12 +53,18 @@ function App() {
       }
     };
 
+    const handleDoubleClick = (e) => {
+      e.preventDefault();
+    };
+
     document.addEventListener('contextmenu', handleContextMenu);
     document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('dblclick', handleDoubleClick);
 
     return () => {
       document.removeEventListener('contextmenu', handleContextMenu);
       document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('dblclick', handleDoubleClick);
     };
   }, []);
 
