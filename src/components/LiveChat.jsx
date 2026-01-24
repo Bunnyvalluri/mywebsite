@@ -2,8 +2,11 @@ import { motion } from 'framer-motion';
 import { FaComments, FaTimes, FaPaperPlane } from 'react-icons/fa';
 import { useState } from 'react';
 
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
 const LiveChat = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
   const [messages, setMessages] = useState([
     { text: "Hi! 👋 I'm Rahul's AI assistant. How can I help you today?", sender: 'bot', time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }
   ]);
@@ -16,43 +19,49 @@ const LiveChat = () => {
     "Tech Stack"
   ];
 
-  const handleSend = () => {
+  // Initialize Gemini AI
+  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
+
+  const handleSend = async () => {
     if (!inputValue.trim()) return;
 
-    const newMessage = {
+    const userMessage = {
       text: inputValue,
       sender: 'user',
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
-    setMessages([...messages, newMessage]);
+    setMessages(prev => [...prev, userMessage]);
     setInputValue('');
+    setIsTyping(true);
 
-    // Simulate bot response
-    setTimeout(() => {
-      const botResponse = {
-        text: getBotResponse(inputValue),
+    try {
+      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      const result = await model.generateContent(inputValue);
+      const response = await result.response;
+      const text = response.text();
+
+      const botMessage = {
+        text: text,
         sender: 'bot',
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
-      setMessages(prev => [...prev, botResponse]);
-    }, 1000);
-  };
-
-  const getBotResponse = (input) => {
-    const lowerInput = input.toLowerCase();
-    if (lowerInput.includes('project')) {
-      return "Check out my featured projects section! I've built Cloud Guard, 3D Butterfly Animation, and Green Quest. 🚀";
-    } else if (lowerInput.includes('resume') || lowerInput.includes('cv')) {
-      return "You can download my resume by clicking the 'Download CV' button in the hero section! 📄";
-    } else if (lowerInput.includes('contact')) {
-      return "You can reach me at valluri.rahul@example.com or use the contact form below! 📧";
-    } else if (lowerInput.includes('tech') || lowerInput.includes('skill')) {
-      return "I specialize in React, Node.js, MongoDB, and modern web technologies. Check out the Services section for more details! 💻";
-    } else {
-      return "Thanks for your message! Feel free to explore my portfolio or use the contact form to get in touch. 😊";
+      setMessages(prev => [...prev, botMessage]);
+    } catch (error) {
+      console.error("Error fetching Gemini response:", error);
+      const errorMessage = {
+        text: "I apologize, but I'm having trouble connecting right now. Please try again later.",
+        sender: 'bot',
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsTyping(false);
     }
   };
+
+  // Removed getBotResponse as we are using the API directly
+
 
   const handleQuickReply = (reply) => {
     setInputValue(reply);
@@ -116,8 +125,8 @@ const LiveChat = () => {
                 <div className={`max-w-[80%] ${message.sender === 'user' ? 'order-2' : 'order-1'}`}>
                   <div
                     className={`p-3 rounded-2xl ${message.sender === 'user'
-                        ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white'
-                        : 'glass border border-[--color-border-custom] text-[--color-primary]'
+                      ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white'
+                      : 'glass border border-[--color-border-custom] text-[--color-primary]'
                       }`}
                   >
                     <p className="text-sm">{message.text}</p>
@@ -126,6 +135,21 @@ const LiveChat = () => {
                 </div>
               </motion.div>
             ))}
+            {isTyping && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex justify-start"
+              >
+                <div className="bg-[--color-surface] p-3 rounded-2xl border border-[--color-border-custom]">
+                  <div className="flex gap-1">
+                    <span className="w-2 h-2 bg-[--color-accent] rounded-full animate-bounce" style={{ animationDelay: '0s' }} />
+                    <span className="w-2 h-2 bg-[--color-accent] rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
+                    <span className="w-2 h-2 bg-[--color-accent] rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
+                  </div>
+                </div>
+              </motion.div>
+            )}
           </div>
 
           {/* Quick Replies */}
