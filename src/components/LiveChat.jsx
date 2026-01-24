@@ -2,11 +2,10 @@ import { motion } from 'framer-motion';
 import { FaComments, FaTimes, FaPaperPlane } from 'react-icons/fa';
 import { useState } from 'react';
 
-import { GoogleGenerativeAI } from "@google/generative-ai";
+
 
 const LiveChat = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isTyping, setIsTyping] = useState(false);
   const [messages, setMessages] = useState([
     { text: "Hi! 👋 I'm Rahul's AI assistant. How can I help you today?", sender: 'bot', time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }
   ]);
@@ -19,98 +18,46 @@ const LiveChat = () => {
     "Tech Stack"
   ];
 
-  const handleSend = async () => {
+  const handleSend = () => {
     if (!inputValue.trim()) return;
-    await handleSendWithText(inputValue);
-  };
 
-
-  // Removed getBotResponse as we are using the API directly
-
-
-  const handleQuickReply = async (reply) => {
-    setInputValue(reply);
-
-    // Auto-scroll for specific actions
-    if (reply === "View Projects") {
-      const projectsSection = document.getElementById('projects');
-      if (projectsSection) {
-        projectsSection.scrollIntoView({ behavior: 'smooth' });
-      }
-      // We want the AI to also talk about the projects
-      // We can immediately trigger the send logic
-      await handleSendWithText(reply);
-    } else {
-      // For other quick replies, just send them
-      await handleSendWithText(reply);
-    }
-  };
-
-  // Dedicated function to handle sending specific text (reusing the logic from handleSend)
-  const handleSendWithText = async (text) => {
-    const userMessage = {
-      text: text,
+    const newMessage = {
+      text: inputValue,
       sender: 'user',
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
-    setMessages(prev => [...prev, userMessage]);
-    setInputValue(''); // Clear input if it was set
-    setIsTyping(true);
+    setMessages([...messages, newMessage]);
+    setInputValue('');
 
-    try {
-      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-
-      if (!apiKey) {
-        throw new Error("Gemini API key is missing. Please add VITE_GEMINI_API_KEY to your .env file.");
-      }
-
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-
-      const prompt = `
-        You are a helpful AI assistant for Rahul Valluri's portfolio website. 
-        Rahul is a Full Stack Developer specializing in React, Node.js, and modern web technologies.
-        His portfolio showcases these main projects:
-        1. Cloud Guard - A Cloud Security Posture Management Platform (React, Node.js).
-        2. 3D Butterfly Animation - Interactive CSS & JS Animation.
-        3. Green Quest - Environmental Awareness Platform.
-
-        User asking: "${text}"
-        
-        If the user asks to "View Projects", provide a brief, enticing summary of these 3 projects and invite them to scroll down (which the site just did automatically).
-        Otherwise, provide a concise, friendly, and professional response acting as Rahul's assistant.
-      `;
-
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      const botText = response.text();
-
-      const botMessage = {
-        text: botText,
+    // Simulate bot response
+    setTimeout(() => {
+      const botResponse = {
+        text: getBotResponse(inputValue),
         sender: 'bot',
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
-      setMessages(prev => [...prev, botMessage]);
-    } catch (error) {
-      console.error("Error fetching Gemini response:", error);
-      let errorText = "I apologize, but I'm unable to connect at the moment. Please try again later.";
+      setMessages(prev => [...prev, botResponse]);
+    }, 1000);
+  };
 
-      if (error.message.includes("API key")) {
-        errorText = "Configuration Error: API Key is missing or invalid.";
-      } else if (error.message.includes("fetch failed")) {
-        errorText = "Network Error: Please check your internet connection.";
-      }
-
-      const errorMessage = {
-        text: errorText,
-        sender: 'bot',
-        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-      };
-      setMessages(prev => [...prev, errorMessage]);
-    } finally {
-      setIsTyping(false);
+  const getBotResponse = (input) => {
+    const lowerInput = input.toLowerCase();
+    if (lowerInput.includes('project')) {
+      return "Check out my featured projects section! I've built Cloud Guard, 3D Butterfly Animation, and Green Quest. 🚀";
+    } else if (lowerInput.includes('resume') || lowerInput.includes('cv')) {
+      return "You can download my resume by clicking the 'Download CV' button in the hero section! 📄";
+    } else if (lowerInput.includes('contact')) {
+      return "You can reach me at valluri.rahul@example.com or use the contact form below! 📧";
+    } else if (lowerInput.includes('tech') || lowerInput.includes('skill')) {
+      return "I specialize in React, Node.js, MongoDB, and modern web technologies. Check out the Services section for more details! 💻";
+    } else {
+      return "Thanks for your message! Feel free to explore my portfolio or use the contact form to get in touch. 😊";
     }
+  };
+
+  const handleQuickReply = (reply) => {
+    setInputValue(reply);
   };
 
   return (
@@ -181,21 +128,7 @@ const LiveChat = () => {
                 </div>
               </motion.div>
             ))}
-            {isTyping && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="flex justify-start"
-              >
-                <div className="bg-[--color-surface] p-3 rounded-2xl border border-[--color-border-custom]">
-                  <div className="flex gap-1">
-                    <span className="w-2 h-2 bg-[--color-accent] rounded-full animate-bounce" style={{ animationDelay: '0s' }} />
-                    <span className="w-2 h-2 bg-[--color-accent] rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
-                    <span className="w-2 h-2 bg-[--color-accent] rounded-full animate-bounce" style={{ animationDelay: '0.4s' }} />
-                  </div>
-                </div>
-              </motion.div>
-            )}
+
           </div>
 
           {/* Quick Replies */}
