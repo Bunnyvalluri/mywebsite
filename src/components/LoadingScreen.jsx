@@ -13,13 +13,14 @@ const LoadingScreen = ({ onLoadingComplete }) => {
           clearInterval(interval);
           setTimeout(() => {
             setIsComplete(true);
-            setTimeout(() => onLoadingComplete(), 500);
-          }, 500);
+            setTimeout(() => onLoadingComplete(), 200);
+          }, 200);
           return 100;
         }
-        return prev + Math.random() * 15;
+        // Much faster loading: increments between 10 and 40 (avg 25), causing ~4 steps
+        return prev + Math.random() * 30 + 10;
       });
-    }, 100);
+    }, 40);
 
     return () => clearInterval(interval);
   }, [onLoadingComplete]);
