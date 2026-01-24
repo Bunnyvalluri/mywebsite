@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaCode, FaServer, FaShieldAlt, FaGraduationCap, FaTrophy, FaJs, FaReact, FaNodeJs, FaAngular, FaBootstrap, FaAws, FaGitAlt, FaCss3Alt, FaHtml5 } from 'react-icons/fa';
+import { FaCode, FaServer, FaShieldAlt, FaGraduationCap, FaTrophy, FaJs, FaReact, FaNodeJs, FaBootstrap, FaAws, FaGitAlt, FaCss3Alt, FaHtml5 } from 'react-icons/fa';
 import { SiJquery } from 'react-icons/si';
 import SkillsRadar from './SkillsRadar';
 
@@ -40,7 +40,6 @@ const About = () => {
     { name: "JavaScript", icon: FaJs, color: "#F7DF1E", level: 90 },
     { name: "React", icon: FaReact, color: "#61DAFB", level: 85 },
     { name: "Node.js", icon: FaNodeJs, color: "#339933", level: 80 },
-    { name: "Angular.js", icon: FaAngular, color: "#DD0031", level: 75 },
     { name: "jQuery", icon: SiJquery, color: "#0769AD", level: 85 },
     { name: "Bootstrap", icon: FaBootstrap, color: "#7952B3", level: 90 },
     { name: "HTML5", icon: FaHtml5, color: "#E34F26", level: 95 },
