@@ -21,15 +21,41 @@ const LiveChat = () => {
 
   const handleSend = async () => {
     if (!inputValue.trim()) return;
+    await handleSendWithText(inputValue);
+  };
 
+
+  // Removed getBotResponse as we are using the API directly
+
+
+  const handleQuickReply = async (reply) => {
+    setInputValue(reply);
+
+    // Auto-scroll for specific actions
+    if (reply === "View Projects") {
+      const projectsSection = document.getElementById('projects');
+      if (projectsSection) {
+        projectsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+      // We want the AI to also talk about the projects
+      // We can immediately trigger the send logic
+      await handleSendWithText(reply);
+    } else {
+      // For other quick replies, just send them
+      await handleSendWithText(reply);
+    }
+  };
+
+  // Dedicated function to handle sending specific text (reusing the logic from handleSend)
+  const handleSendWithText = async (text) => {
     const userMessage = {
-      text: inputValue,
+      text: text,
       sender: 'user',
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
     setMessages(prev => [...prev, userMessage]);
-    setInputValue('');
+    setInputValue(''); // Clear input if it was set
     setIsTyping(true);
 
     try {
@@ -45,27 +71,29 @@ const LiveChat = () => {
       const prompt = `
         You are a helpful AI assistant for Rahul Valluri's portfolio website. 
         Rahul is a Full Stack Developer specializing in React, Node.js, and modern web technologies.
-        His portfolio showcases projects like 'Cloud Guard', '3D Butterfly Animation', and 'Green Quest'.
-        He offers services in Web Development, UI/UX Design, and App Development.
+        His portfolio showcases these main projects:
+        1. Cloud Guard - A Cloud Security Posture Management Platform (React, Node.js).
+        2. 3D Butterfly Animation - Interactive CSS & JS Animation.
+        3. Green Quest - Environmental Awareness Platform.
+
+        User asking: "${text}"
         
-        User asking: "${inputValue}"
-        
-        Provide a concise, friendly, and professional response acting as Rahul's assistant.
+        If the user asks to "View Projects", provide a brief, enticing summary of these 3 projects and invite them to scroll down (which the site just did automatically).
+        Otherwise, provide a concise, friendly, and professional response acting as Rahul's assistant.
       `;
 
       const result = await model.generateContent(prompt);
       const response = await result.response;
-      const text = response.text();
+      const botText = response.text();
 
       const botMessage = {
-        text: text,
+        text: botText,
         sender: 'bot',
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
       console.error("Error fetching Gemini response:", error);
-
       let errorText = "I apologize, but I'm unable to connect at the moment. Please try again later.";
 
       if (error.message.includes("API key")) {
@@ -83,13 +111,6 @@ const LiveChat = () => {
     } finally {
       setIsTyping(false);
     }
-  };
-
-  // Removed getBotResponse as we are using the API directly
-
-
-  const handleQuickReply = (reply) => {
-    setInputValue(reply);
   };
 
   return (
