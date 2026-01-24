@@ -19,9 +19,6 @@ const LiveChat = () => {
     "Tech Stack"
   ];
 
-  // Initialize Gemini AI
-  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-
   const handleSend = async () => {
     if (!inputValue.trim()) return;
 
@@ -36,8 +33,27 @@ const LiveChat = () => {
     setIsTyping(true);
 
     try {
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+
+      if (!apiKey) {
+        throw new Error("Gemini API key is missing. Please add VITE_GEMINI_API_KEY to your .env file.");
+      }
+
+      const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-      const result = await model.generateContent(inputValue);
+
+      const prompt = `
+        You are a helpful AI assistant for Rahul Valluri's portfolio website. 
+        Rahul is a Full Stack Developer specializing in React, Node.js, and modern web technologies.
+        His portfolio showcases projects like 'Cloud Guard', '3D Butterfly Animation', and 'Green Quest'.
+        He offers services in Web Development, UI/UX Design, and App Development.
+        
+        User asking: "${inputValue}"
+        
+        Provide a concise, friendly, and professional response acting as Rahul's assistant.
+      `;
+
+      const result = await model.generateContent(prompt);
       const response = await result.response;
       const text = response.text();
 
@@ -49,8 +65,17 @@ const LiveChat = () => {
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
       console.error("Error fetching Gemini response:", error);
+
+      let errorText = "I apologize, but I'm unable to connect at the moment. Please try again later.";
+
+      if (error.message.includes("API key")) {
+        errorText = "Configuration Error: API Key is missing or invalid.";
+      } else if (error.message.includes("fetch failed")) {
+        errorText = "Network Error: Please check your internet connection.";
+      }
+
       const errorMessage = {
-        text: "I apologize, but I'm having trouble connecting right now. Please try again later.",
+        text: errorText,
         sender: 'bot',
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
