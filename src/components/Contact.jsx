@@ -67,6 +67,7 @@ const Contact = () => {
           <p className="text-[--color-text-muted] max-w-2xl mx-auto text-lg">
             Let's build something amazing together.
           </p>
+          <p className="text-xs text-[--color-text-muted] mt-2 opacity-50">v1.2 (Formspark Form)</p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
