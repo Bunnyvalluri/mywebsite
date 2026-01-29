@@ -1,19 +1,26 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import {
   OrbitControls,
   PerspectiveCamera,
-  Environment,
   Float,
   ContactShadows,
   Sphere,
   Cylinder,
-  Box,
-  Text,
-  Html
+  Box
 } from '@react-three/drei';
 import * as THREE from 'three';
 import { motion } from 'framer-motion';
+
+// Safe check for WebGL
+const isWebGLAvailable = () => {
+  try {
+    const canvas = document.createElement('canvas');
+    return !!(window.WebGLRenderingContext && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+  } catch (e) {
+    return false;
+  }
+};
 
 // Procedural 3D Robot Character
 const Robot = (props) => {
@@ -54,9 +61,8 @@ const Robot = (props) => {
   });
 
   const materialProps = {
-    metalness: 0.8,
-    roughness: 0.2,
-    envMapIntensity: 1
+    metalness: 0.6,
+    roughness: 0.2
   };
 
   const accentColor = hovered ? "#8b5cf6" : "#6366f1"; // Purple to Indigo
@@ -116,34 +122,26 @@ const Robot = (props) => {
           <meshStandardMaterial color="#1e293b" />
         </Sphere>
       </group>
-
-      {/* Chat Bubble Interface using HTML */}
-      <Html position={[1.2, 2.2, 0]} distanceFactor={6} transform occlude>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-indigo-500/30 w-48 text-center pointer-events-none select-none"
-        >
-          <p className="text-sm font-bold text-slate-800 dark:text-white">
-            {hovered ? "Let's Build!" : "Hi, I'm Rahul's AI Assistant!"}
-          </p>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            {hovered ? "Click to view projects" : "Hover me to say hello!"}
-          </p>
-        </motion.div>
-      </Html>
-
     </group>
   );
 };
 
 // Main Component
 const ThreeDShowcase = () => {
+  const [hasWebGL, setHasWebGL] = useState(true);
+
+  useEffect(() => {
+    setHasWebGL(isWebGLAvailable());
+  }, []);
+
+  if (!hasWebGL) {
+    return null; // Gracefully degrade if WebGL is not supported
+  }
+
   return (
     <section className="h-[600px] w-full bg-gradient-to-b from-[--color-background-custom] to-[--color-surface] relative overflow-hidden">
 
-      {/* Accessible Fallback / Overlay Text */}
+      {/* Overlay Text */}
       <div className="absolute top-10 left-0 w-full text-center z-10 pointer-events-none px-4">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -159,17 +157,37 @@ const ThreeDShowcase = () => {
         </motion.div>
       </div>
 
+      {/* Chat Bubble Interface (Moved slightly to avoid z-index issues) */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1, duration: 0.5 }}
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[200px] md:translate-x-[150px] md:-translate-y-[250px] z-20 pointer-events-none"
+      >
+        <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-indigo-500/30 w-48 text-center relative">
+          <p className="text-sm font-bold text-slate-800 dark:text-white">
+            Hi, I'm Rahul's AI Bot!
+          </p>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+            Interact with me!
+          </p>
+          {/* Arrow */}
+          <div className="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white/90 dark:bg-slate-800/90 border-r border-b border-indigo-500/30 rotate-45" />
+        </div>
+      </motion.div>
+
       <div className="absolute inset-0 z-0">
         <Canvas shadows dpr={[1, 2]}>
           <PerspectiveCamera makeDefault position={[0, 1, 6]} fov={50} />
 
-          {/* Lighting */}
-          <ambientLight intensity={0.5} />
-          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow shadow-mapSize={[2048, 2048]} />
+          {/* Lighting - Manual setup instead of Environment to be safer */}
+          <ambientLight intensity={0.7} />
+          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
           <pointLight position={[-10, -10, -10]} intensity={0.5} color="#6366f1" />
+          <directionalLight position={[0, 10, 0]} intensity={0.5} />
 
-          {/* Environment */}
-          <Environment preset="city" />
+          {/* Background color to match theme (optional) */}
+          {/* <color attach="background" args={['#0f0c29']} /> */}
 
           {/* Floating Character */}
           <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
@@ -179,7 +197,7 @@ const ThreeDShowcase = () => {
           {/* Shadows */}
           <ContactShadows position={[0, -2.5, 0]} opacity={0.4} scale={10} blur={2.5} far={4} color="#000000" />
 
-          {/* Interactive Controls (limited) */}
+          {/* Manual Controls */}
           <OrbitControls
             enableZoom={false}
             enablePan={false}
