@@ -70,7 +70,7 @@ const ThreeDCharacterShowcase = () => {
 
                 {/* Floating 3D Character - Developer */}
                 <motion.div
-                  className="hidden lg:block absolute -right-20 -top-24 w-64 h-64 xl:w-80 xl:h-80 pointer-events-none"
+                  className="hidden lg:block absolute -right-24 -top-32 w-80 h-80 xl:w-[28rem] xl:h-[28rem] pointer-events-none"
                   animate={{
                     y: [0, -10, 0],
                     rotate: [0, 1, 0]
@@ -113,10 +113,10 @@ const ThreeDCharacterShowcase = () => {
                   <FiPenTool className="text-8xl text-pink-500" />
                 </div>
 
-                <div className="relative z-10 lg:pl-4"> {/* Added padding left for desktop to separate from image overlap if needed, though layout handles it */}
+                <div className="relative z-10 lg:pl-12"> {/* increased padding */}
                   {/* Floating 3D Character - Designer (Left side for variety on desktop) */}
                   <motion.div
-                    className="hidden lg:block absolute -left-24 -bottom-12 w-64 h-64 xl:w-80 xl:h-80 pointer-events-none z-20"
+                    className="hidden lg:block absolute -left-28 -bottom-16 w-80 h-80 xl:w-[28rem] xl:h-[28rem] pointer-events-none z-20"
                     animate={{
                       y: [0, 10, 0],
                       rotate: [0, -1, 0]
