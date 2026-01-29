@@ -8,7 +8,14 @@ Your portfolio website has been enhanced with **enterprise-level components** in
 
 ## 📦 New Components Created
 
-### 1. **AnimatedComponents.jsx** - Component Library
+### 1. **ThreeDShowcase.jsx** - Interactive 3D Character 🆕
+A stunning, interactive 3D robot character built with React Three Fiber:
+- ✅ **Procedurally Generated**: No heavy model files, pure code geometry.
+- ✅ **Interactive**: Tracks mouse movement and responds to hover.
+- ✅ **High Performance**: Optimized geometry and lighting.
+- ✅ **Floating Interface**: Integrated HTML tooltip in 3D space.
+
+### 2. **AnimatedComponents.jsx** - Component Library
 A comprehensive library of 11 reusable animated components:
 
 | Component | Purpose | Inspired By |

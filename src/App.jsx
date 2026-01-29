@@ -11,6 +11,7 @@ import {
 
 // Lazy load components for better performance
 const Hero = lazy(() => import('./components/Hero'));
+const ThreeDShowcase = lazy(() => import('./components/ThreeDShowcase'));
 const Stats = lazy(() => import('./components/Stats'));
 const About = lazy(() => import('./components/About'));
 const Services = lazy(() => import('./components/Services'));
@@ -140,6 +141,13 @@ function App() {
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton variant="hero" />}>
               <Hero />
+            </Suspense>
+          </ErrorBoundary>
+
+          {/* 3D Interactive Showcase */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<ComponentSkeleton height="600px" />}>
+              <ThreeDShowcase />
             </Suspense>
           </ErrorBoundary>
 
