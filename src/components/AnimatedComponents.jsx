@@ -258,6 +258,9 @@ export const ParticleBackground = ({ particleCount = 50 }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
+    // Disable on mobile/tablet for performance
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 

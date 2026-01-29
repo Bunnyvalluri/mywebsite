@@ -106,18 +106,26 @@ function App() {
 
         {/* LIGHT MODE: Professional Engineering Grid + Aurora */}
         <div className="absolute inset-0 dark:hidden">
-          {/* Technical Grid Pattern */}
+          {/* Technical Grid Pattern - Static and Performant */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
-          {/* Subtle Breathing Aurora */}
-          <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-gradient-to-br from-indigo-100/50 via-transparent to-blue-100/50 animate-spin-slow opacity-60"></div>
+          {/* Subtle Breathing Aurora - Only on Desktop */}
+          <div className="hidden md:block absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-gradient-to-br from-indigo-100/50 via-transparent to-blue-100/50 animate-spin-slow opacity-60"></div>
+
+          {/* Mobile Static Gradient - Lighter */}
+          <div className="md:hidden absolute inset-0 bg-gradient-to-b from-indigo-50/50 to-white/50"></div>
         </div>
 
         {/* DARK MODE: vivid Cyberpunk Blobs */}
         <div className="hidden dark:block opacity-20">
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-[--color-accent] blur-[120px] animate-pulse-slow"></div>
-          <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-[--color-success] blur-[120px] animate-pulse-slow delay-1000"></div>
-          <div className="absolute top-[40%] left-[40%] w-[30%] h-[30%] rounded-full bg-purple-500 blur-[100px] animate-blob"></div>
+          {/* Only animate on Desktop */}
+          <div className="hidden md:block absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-[--color-accent] blur-[120px] animate-pulse-slow"></div>
+          <div className="hidden md:block absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-[--color-success] blur-[120px] animate-pulse-slow delay-1000"></div>
+          <div className="hidden md:block absolute top-[40%] left-[40%] w-[30%] h-[30%] rounded-full bg-purple-500 blur-[100px] animate-blob"></div>
+
+          {/* Mobile Static Glow - Optimized */}
+          <div className="md:hidden absolute top-0 left-0 w-full h-1/2 bg-[--color-accent]/10 blur-[80px]"></div>
+          <div className="md:hidden absolute bottom-0 right-0 w-full h-1/2 bg-[--color-success]/10 blur-[80px]"></div>
         </div>
       </div>
 
