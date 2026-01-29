@@ -1,20 +1,35 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import Stats from './components/Stats';
-import About from './components/About';
-import Services from './components/Services';
-import ProcessShowcase from './components/ProcessShowcase';
-import Certifications from './components/Certifications';
-import Projects from './components/Projects';
-import ClientLogos from './components/ClientLogos';
-import Testimonials from './components/Testimonials';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
 import MagneticCursor from './components/MagneticCursor';
-import LoadingScreen from './components/LoadingScreen';
 import ScrollProgressIndicator from './components/ScrollProgressIndicator';
-import LiveChat from './components/LiveChat';
+import {
+  ComponentSkeleton,
+  ErrorFallback,
+  optimizeFontLoading
+} from './components/LazyLoadWrapper';
+
+// Lazy load components for better performance
+const Hero = lazy(() => import('./components/Hero'));
+const Stats = lazy(() => import('./components/Stats'));
+const About = lazy(() => import('./components/About'));
+const Services = lazy(() => import('./components/Services'));
+const ProcessShowcase = lazy(() => import('./components/ProcessShowcase'));
+const Certifications = lazy(() => import('./components/Certifications'));
+const Projects = lazy(() => import('./components/Projects'));
+const ClientLogos = lazy(() => import('./components/ClientLogos'));
+const Testimonials = lazy(() => import('./components/Testimonials'));
+const Contact = lazy(() => import('./components/Contact'));
+const Footer = lazy(() => import('./components/Footer'));
+const LiveChat = lazy(() => import('./components/LiveChat'));
+const LoadingScreen = lazy(() => import('./components/LoadingScreen'));
+
+// Enhanced lazy load components (optional - can be swapped in)
+// const EnhancedHero = lazy(() => import('./components/EnhancedHero'));
+// const StatsSection = lazy(() => import('./components/StatsSection'));
+// const EnhancedProjects = lazy(() => import('./components/EnhancedProjects'));
+// const EnhancedTestimonials = lazy(() => import('./components/EnhancedTestimonials'));
+// const EnhancedContact = lazy(() => import('./components/EnhancedContact'));
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,6 +40,11 @@ function App() {
     }
     return false;
   });
+
+  // Optimize font loading on mount
+  useEffect(() => {
+    optimizeFontLoading();
+  }, []);
 
   useEffect(() => {
     if (darkMode) {
@@ -68,7 +88,6 @@ function App() {
     };
   }, []);
 
-
   const toggleTheme = () => {
     setDarkMode(!darkMode);
   };
@@ -77,7 +96,9 @@ function App() {
     <div className="bg-[--color-background-custom] text-[--color-text-main] min-h-screen font-sans selection:bg-[--color-accent] selection:text-white transition-colors duration-300 relative overflow-hidden select-none">
 
       {/* Loading Screen */}
-      {isLoading && <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />}
+      <Suspense fallback={null}>
+        {isLoading && <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />}
+      </Suspense>
 
       {/* Cinematic Background Mesh */}
       <div className="fixed inset-0 z-0 pointer-events-none transition-opacity duration-500">
@@ -99,25 +120,99 @@ function App() {
         </div>
       </div>
 
-      <MagneticCursor />
-      <ScrollProgressIndicator />
-      <LiveChat />
+      <Suspense fallback={null}>
+        <MagneticCursor />
+      </Suspense>
+
+      <Suspense fallback={null}>
+        <ScrollProgressIndicator />
+      </Suspense>
+
+      <Suspense fallback={null}>
+        <LiveChat />
+      </Suspense>
 
       <div className="relative z-10">
         <Header darkMode={darkMode} toggleTheme={toggleTheme} />
+
         <main>
-          <Hero />
-          <Stats />
-          <About />
-          <Services />
-          <ProcessShowcase />
-          <Projects />
-          <ClientLogos />
-          <Certifications />
-          <Testimonials />
-          <Contact />
+          {/* Hero Section - Critical, load immediately */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<ComponentSkeleton variant="hero" />}>
+              <Hero />
+            </Suspense>
+          </ErrorBoundary>
+
+          {/* Stats Section */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<ComponentSkeleton height="300px" />}>
+              <Stats />
+            </Suspense>
+          </ErrorBoundary>
+
+          {/* About Section */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<ComponentSkeleton height="600px" />}>
+              <About />
+            </Suspense>
+          </ErrorBoundary>
+
+          {/* Services Section */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<ComponentSkeleton variant="grid" />}>
+              <Services />
+            </Suspense>
+          </ErrorBoundary>
+
+          {/* Process Showcase */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<ComponentSkeleton height="500px" />}>
+              <ProcessShowcase />
+            </Suspense>
+          </ErrorBoundary>
+
+          {/* Projects Section */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<ComponentSkeleton variant="grid" />}>
+              <Projects />
+            </Suspense>
+          </ErrorBoundary>
+
+          {/* Client Logos */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<ComponentSkeleton height="200px" />}>
+              <ClientLogos />
+            </Suspense>
+          </ErrorBoundary>
+
+          {/* Certifications */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<ComponentSkeleton variant="grid" />}>
+              <Certifications />
+            </Suspense>
+          </ErrorBoundary>
+
+          {/* Testimonials */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<ComponentSkeleton variant="card" />}>
+              <Testimonials />
+            </Suspense>
+          </ErrorBoundary>
+
+          {/* Contact Section */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<ComponentSkeleton height="600px" />}>
+              <Contact />
+            </Suspense>
+          </ErrorBoundary>
         </main>
-        <Footer />
+
+        {/* Footer */}
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <Suspense fallback={<ComponentSkeleton height="300px" />}>
+            <Footer />
+          </Suspense>
+        </ErrorBoundary>
       </div>
     </div>
   );
