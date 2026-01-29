@@ -180,31 +180,31 @@ const Header = ({ darkMode, toggleTheme }) => {
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Menu Overlay - Apple Style */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="md:hidden fixed top-20 left-0 right-0 bottom-0 bg-[--color-background-custom] border-t border-[--color-border-custom] overflow-hidden z-[9999]"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }} // Apple ease-out curve
+            className="md:hidden fixed inset-0 top-[80px] z-[9998] bg-[--color-background-custom]/95 backdrop-blur-3xl border-t border-[--color-border-custom]"
           >
-            <div className="flex flex-col h-full overflow-y-auto pb-32 bg-[--color-surface]/50 backdrop-blur-xl">
-              <div className="px-4 pt-4 pb-6 space-y-2 max-w-7xl mx-auto w-full">
+            <div className="flex flex-col h-full overflow-y-auto p-6 pb-32">
+              <div className="space-y-2 max-w-md mx-auto w-full">
                 {links.map((link, index) => {
                   const isActive = activeSection === link.href.substring(1);
                   return (
                     <motion.a
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.05 + 0.1 }}
                       key={link.name}
                       href={link.href}
                       onClick={(e) => handleNavClick(e, link.href)}
-                      className={`block px-4 py-4 rounded-xl text-lg font-medium transition-all ${isActive
-                        ? 'bg-[--color-accent]/10 text-[--color-accent]'
-                        : 'text-[--color-text-main] hover:bg-[--color-surface]'
+                      className={`block px-6 py-5 rounded-2xl text-xl font-semibold transition-all ${isActive
+                        ? 'bg-[--color-accent]/10 text-[--color-accent] scale-[1.02]'
+                        : 'text-[--color-text-main] hover:bg-[--color-surface] active:scale-95'
                         }`}
                     >
                       {link.name}

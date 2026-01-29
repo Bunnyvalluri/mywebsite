@@ -31,9 +31,12 @@ const Hero = () => {
             transition={{ duration: 0.5 }}
             className="inline-block"
           >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-[--color-accent]/30 text-[--color-accent] font-semibold text-sm tracking-wide backdrop-blur-xl">
-              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              Available for Work
+            <span className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full glass border border-[--color-accent]/20 text-[--color-accent] font-medium text-sm tracking-wide backdrop-blur-xl shadow-sm">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+              </span>
+              Available for New Projects
             </span>
           </motion.div>
 
@@ -42,16 +45,16 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-[--color-secondary] font-medium text-lg tracking-wide"
+              className="text-[--color-secondary] font-medium text-lg md:text-xl tracking-wide"
             >
-              Hi, I'm Valluri Rahul 👋
+              Hello, I'm Valluri Rahul
             </motion.p>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-black text-[--color-primary] tracking-tight leading-[1.1]"
+              className="text-5xl md:text-7xl lg:text-7xl font-bold text-[--color-primary] tracking-tighter leading-[1.1]"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Full Stack{' '}
