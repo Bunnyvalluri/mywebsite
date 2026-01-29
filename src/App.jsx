@@ -52,9 +52,15 @@ function App() {
     if (darkMode) {
       document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
+      // Update Favicon to Dark Mode version
+      const link = document.querySelector("link[rel~='icon']");
+      if (link) link.href = '/favicon-dark.svg';
     } else {
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
+      // Update Favicon to Light Mode version
+      const link = document.querySelector("link[rel~='icon']");
+      if (link) link.href = '/favicon.svg?v=2';
     }
   }, [darkMode]);
 
