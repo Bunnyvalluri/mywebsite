@@ -70,11 +70,11 @@ const LiveChat = () => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-8 left-8 z-[9997] w-16 h-16 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full shadow-2xl flex items-center justify-center text-white hover:shadow-indigo-500/50 transition-shadow group"
+          className="fixed bottom-4 right-4 md:bottom-8 md:left-8 z-[9997] w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full shadow-2xl flex items-center justify-center text-white hover:shadow-indigo-500/50 transition-shadow group"
           aria-label="Open chat"
         >
-          <FaComments className="text-2xl group-hover:scale-110 transition-transform" />
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white animate-pulse" />
+          <FaComments className="text-xl md:text-2xl group-hover:scale-110 transition-transform" />
+          <span className="absolute -top-1 -right-1 w-3 h-3 md:w-4 md:h-4 bg-green-500 rounded-full border-2 border-white animate-pulse" />
         </motion.button>
       )}
 
@@ -84,7 +84,7 @@ const LiveChat = () => {
           initial={{ opacity: 0, y: 20, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.95 }}
-          className="fixed bottom-8 left-8 z-[9997] w-96 h-[500px] glass-strong rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-[--color-border-custom]"
+          className="fixed bottom-4 left-4 right-4 md:right-auto md:left-8 md:bottom-8 z-[9997] md:w-96 h-[70vh] md:h-[500px] glass-strong rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-[--color-border-custom]"
         >
           {/* Header */}
           <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-4 flex items-center justify-between">
