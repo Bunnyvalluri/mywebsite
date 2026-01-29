@@ -1,4 +1,5 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { ErrorBoundary } from 'react-error-boundary';
 import Header from './components/Header';
 import MagneticCursor from './components/MagneticCursor';
@@ -97,9 +98,9 @@ function App() {
     <div className="bg-[--color-background-custom] text-[--color-text-main] min-h-screen font-sans selection:bg-[--color-accent] selection:text-white transition-colors duration-300 relative overflow-hidden select-none">
 
       {/* Loading Screen */}
-      <Suspense fallback={null}>
-        {isLoading && <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />}
-      </Suspense>
+      <AnimatePresence>
+        {isLoading && <AppleLoader onComplete={() => setIsLoading(false)} />}
+      </AnimatePresence>
 
       {/* Cinematic Background Mesh */}
       <div className="fixed inset-0 z-0 pointer-events-none transition-opacity duration-500">
