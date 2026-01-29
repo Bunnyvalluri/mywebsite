@@ -70,7 +70,7 @@ const ThreeDCharacterShowcase = () => {
 
                 {/* Floating 3D Character - Developer */}
                 <motion.div
-                  className="hidden md:block absolute -right-20 -top-24 w-64 h-64 lg:w-80 lg:h-80 pointer-events-none"
+                  className="hidden lg:block absolute -right-20 -top-24 w-64 h-64 xl:w-80 xl:h-80 pointer-events-none"
                   animate={{
                     y: [0, -10, 0],
                     rotate: [0, 1, 0]
@@ -88,8 +88,8 @@ const ThreeDCharacterShowcase = () => {
                   />
                 </motion.div>
 
-                {/* Mobile Image */}
-                <div className="md:hidden mt-8 flex justify-center">
+                {/* Mobile/Tablet Image */}
+                <div className="lg:hidden mt-8 flex justify-center">
                   <img
                     src="/assets/3d/developer.png"
                     alt="3D Developer Character"
@@ -116,7 +116,7 @@ const ThreeDCharacterShowcase = () => {
                 <div className="relative z-10 lg:pl-4"> {/* Added padding left for desktop to separate from image overlap if needed, though layout handles it */}
                   {/* Floating 3D Character - Designer (Left side for variety on desktop) */}
                   <motion.div
-                    className="hidden md:block absolute -left-24 -bottom-12 w-64 h-64 lg:w-80 lg:h-80 pointer-events-none z-20"
+                    className="hidden lg:block absolute -left-24 -bottom-12 w-64 h-64 xl:w-80 xl:h-80 pointer-events-none z-20"
                     animate={{
                       y: [0, 10, 0],
                       rotate: [0, -1, 0]
@@ -158,8 +158,8 @@ const ThreeDCharacterShowcase = () => {
                     </ShimmerButton>
                   </div>
 
-                  {/* Mobile Image */}
-                  <div className="md:hidden mt-8 flex justify-center">
+                  {/* Mobile/Tablet Image */}
+                  <div className="lg:hidden mt-8 flex justify-center">
                     <img
                       src="/assets/3d/designer.png"
                       alt="3D Designer Character"
