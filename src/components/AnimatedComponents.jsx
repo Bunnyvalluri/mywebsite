@@ -73,10 +73,20 @@ export const FloatingCard = ({ children, className = '' }) => {
       animate={{
         rotateX,
         rotateY,
+        y: 0,
+        scale: 1
       }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      whileHover={{
+        y: -5,
+        scale: 1.02
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 400,
+        damping: 17
+      }}
       style={{ transformStyle: "preserve-3d" }}
-      className={`relative ${className}`}
+      className={`perspective-1000 ${className}`}
     >
       {children}
     </motion.div>
@@ -86,9 +96,9 @@ export const FloatingCard = ({ children, className = '' }) => {
 // Gradient Border Card
 export const GradientBorderCard = ({ children, className = '' }) => {
   return (
-    <div className={`relative group ${className}`}>
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-[--color-accent] to-[--color-accent-secondary] rounded-2xl opacity-75 group-hover:opacity-100 blur transition duration-1000 group-hover:duration-200 animate-pulse-slow" />
-      <div className="relative bg-[--color-surface] rounded-2xl p-6">
+    <div className={`relative group p-[1px] rounded-2xl overflow-hidden ${className}`}>
+      <div className="absolute inset-0 bg-gradient-to-r from-[--color-accent] via-purple-500 to-[--color-accent] opacity-50 group-hover:opacity-100 transition-opacity duration-200 animate-gradient-fast" />
+      <div className="relative bg-[--color-surface] rounded-2xl h-full">
         {children}
       </div>
     </div>
@@ -97,31 +107,32 @@ export const GradientBorderCard = ({ children, className = '' }) => {
 
 // Spotlight Card (Aceternity UI inspired)
 export const SpotlightCard = ({ children, className = '' }) => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const cardRef = useRef(null);
+  const divRef = React.useRef(null);
+  const [position, setPosition] = React.useState({ x: 0, y: 0 });
+  const [opacity, setOpacity] = React.useState(0);
 
   const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    setMousePosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
+    if (!divRef.current) return;
+    const rect = divRef.current.getBoundingClientRect();
+    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
   };
 
   return (
     <div
-      ref={cardRef}
+      ref={divRef}
       onMouseMove={handleMouseMove}
-      className={`group relative overflow-hidden rounded-2xl bg-[--color-surface] border border-[--color-border-custom] p-6 ${className}`}
+      onMouseEnter={() => setOpacity(1)}
+      onMouseLeave={() => setOpacity(0)}
+      className={`relative rounded-2xl border border-[--color-border-custom] bg-[--color-surface] overflow-hidden ${className}`}
     >
       <div
-        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100"
+        className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-200"
         style={{
-          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(99, 102, 241, 0.15), transparent 40%)`,
+          opacity,
+          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, var(--color-accent-secondary) 0%, transparent 40%)`,
         }}
       />
-      <div className="relative z-10">{children}</div>
+      <div className="relative h-full">{children}</div>
     </div>
   );
 };

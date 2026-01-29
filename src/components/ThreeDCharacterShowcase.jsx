@@ -37,7 +37,7 @@ const ThreeDCharacterShowcase = () => {
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
               <SpotlightCard className="p-8 relative overflow-visible border-blue-500/20 bg-blue-50/50 dark:bg-blue-900/10">
@@ -72,11 +72,11 @@ const ThreeDCharacterShowcase = () => {
                 <motion.div
                   className="hidden md:block absolute -right-20 -top-24 w-64 h-64 lg:w-80 lg:h-80 pointer-events-none"
                   animate={{
-                    y: [0, -20, 0],
-                    rotate: [0, 2, 0]
+                    y: [0, -10, 0],
+                    rotate: [0, 1, 0]
                   }}
                   transition={{
-                    duration: 6,
+                    duration: 4,
                     repeat: Infinity,
                     ease: "easeInOut"
                   }}
@@ -105,7 +105,7 @@ const ThreeDCharacterShowcase = () => {
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
               <SpotlightCard className="p-8 relative overflow-visible border-pink-500/20 bg-pink-50/50 dark:bg-pink-900/10">
@@ -118,14 +118,14 @@ const ThreeDCharacterShowcase = () => {
                   <motion.div
                     className="hidden md:block absolute -left-24 -bottom-12 w-64 h-64 lg:w-80 lg:h-80 pointer-events-none z-20"
                     animate={{
-                      y: [0, 20, 0],
-                      rotate: [0, -2, 0]
+                      y: [0, 10, 0],
+                      rotate: [0, -1, 0]
                     }}
                     transition={{
-                      duration: 7,
+                      duration: 4.5,
                       repeat: Infinity,
                       ease: "easeInOut",
-                      delay: 1
+                      delay: 0.5
                     }}
                   >
                     <img
