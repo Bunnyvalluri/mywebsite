@@ -11,7 +11,6 @@ import {
 
 // Lazy load components for better performance
 const Hero = lazy(() => import('./components/Hero'));
-const ThreeDShowcase = lazy(() => import('./components/ThreeDShowcase'));
 const Stats = lazy(() => import('./components/Stats'));
 const About = lazy(() => import('./components/About'));
 const Services = lazy(() => import('./components/Services'));
@@ -31,6 +30,7 @@ const LoadingScreen = lazy(() => import('./components/LoadingScreen'));
 // const EnhancedProjects = lazy(() => import('./components/EnhancedProjects'));
 // const EnhancedTestimonials = lazy(() => import('./components/EnhancedTestimonials'));
 // const EnhancedContact = lazy(() => import('./components/EnhancedContact'));
+const ThreeDCharacterShowcase = lazy(() => import('./components/ThreeDCharacterShowcase'));
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -144,13 +144,6 @@ function App() {
             </Suspense>
           </ErrorBoundary>
 
-          {/* 3D Interactive Showcase */}
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <Suspense fallback={<ComponentSkeleton height="600px" />}>
-              <ThreeDShowcase />
-            </Suspense>
-          </ErrorBoundary>
-
           {/* Stats Section */}
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton height="300px" />}>
@@ -169,6 +162,13 @@ function App() {
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton variant="grid" />}>
               <Services />
+            </Suspense>
+          </ErrorBoundary>
+
+          {/* 3D Character Showcase */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <Suspense fallback={<ComponentSkeleton height="500px" />}>
+              <ThreeDCharacterShowcase />
             </Suspense>
           </ErrorBoundary>
 
