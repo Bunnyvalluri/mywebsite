@@ -54,7 +54,7 @@ function App() {
       localStorage.setItem('theme', 'dark');
       // Update Favicon to Dark Mode version
       const link = document.querySelector("link[rel~='icon']");
-      if (link) link.href = '/favicon-dark.svg';
+      if (link) link.href = '/favicon-dark.svg?v=3';
     } else {
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
