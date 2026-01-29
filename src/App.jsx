@@ -22,7 +22,7 @@ const Testimonials = lazy(() => import('./components/Testimonials'));
 const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
 const LiveChat = lazy(() => import('./components/LiveChat'));
-const LoadingScreen = lazy(() => import('./components/LoadingScreen'));
+import AppleLoader from './components/AppleLoader';
 
 // Enhanced lazy load components (optional - can be swapped in)
 // const EnhancedHero = lazy(() => import('./components/EnhancedHero'));
