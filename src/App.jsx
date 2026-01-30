@@ -156,12 +156,12 @@ function App() {
             </Suspense>
           </ErrorBoundary>
 
-          {/* Services Section - Hidden for original view */}
-          {/* <ErrorBoundary FallbackComponent={ErrorFallback}>
+          {/* Services Section - What I Do (Code + Design) */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton variant="grid" />}>
               <Services />
             </Suspense>
-          </ErrorBoundary> */}
+          </ErrorBoundary>
 
           {/* 3D Character Showcase - Disabled for Performance */}
           {/* <ErrorBoundary FallbackComponent={ErrorFallback}>
@@ -170,12 +170,12 @@ function App() {
             </Suspense>
           </ErrorBoundary> */}
 
-          {/* Process Showcase - Hidden for original view */}
-          {/* <ErrorBoundary FallbackComponent={ErrorFallback}>
+          {/* Process Showcase - Workflow (Design -> Code) */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton height="500px" />}>
               <ProcessShowcase />
             </Suspense>
-          </ErrorBoundary> */}
+          </ErrorBoundary>
 
           {/* Projects Section */}
           <ErrorBoundary FallbackComponent={ErrorFallback}>
