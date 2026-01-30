@@ -11,26 +11,27 @@ import {
 } from './components/LazyLoadWrapper';
 
 // Lazy load components for better performance
-const Hero = lazy(() => import('./components/Hero'));
-const Stats = lazy(() => import('./components/Stats'));
+// Standard components (commented out in favor of Enhanced versions)
+// const Hero = lazy(() => import('./components/Hero'));
+// const Stats = lazy(() => import('./components/Stats'));
 const About = lazy(() => import('./components/About'));
 const Services = lazy(() => import('./components/Services'));
 const ProcessShowcase = lazy(() => import('./components/ProcessShowcase'));
 const Certifications = lazy(() => import('./components/Certifications'));
-const Projects = lazy(() => import('./components/Projects'));
+// const Projects = lazy(() => import('./components/Projects'));
 const ClientLogos = lazy(() => import('./components/ClientLogos'));
-const Testimonials = lazy(() => import('./components/Testimonials'));
-const Contact = lazy(() => import('./components/Contact'));
+// const Testimonials = lazy(() => import('./components/Testimonials'));
+// const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
 const LiveChat = lazy(() => import('./components/LiveChat'));
 import AppleLoader from './components/AppleLoader';
 
-// Enhanced lazy load components (optional - can be swapped in)
-// const EnhancedHero = lazy(() => import('./components/EnhancedHero'));
-// const StatsSection = lazy(() => import('./components/StatsSection'));
-// const EnhancedProjects = lazy(() => import('./components/EnhancedProjects'));
-// const EnhancedTestimonials = lazy(() => import('./components/EnhancedTestimonials'));
-// const EnhancedContact = lazy(() => import('./components/EnhancedContact'));
+// Enhanced lazy load components
+const EnhancedHero = lazy(() => import('./components/EnhancedHero'));
+const StatsSection = lazy(() => import('./components/StatsSection'));
+const EnhancedProjects = lazy(() => import('./components/EnhancedProjects'));
+const EnhancedTestimonials = lazy(() => import('./components/EnhancedTestimonials'));
+const EnhancedContact = lazy(() => import('./components/EnhancedContact'));
 const ThreeDCharacterShowcase = lazy(() => import('./components/ThreeDCharacterShowcase'));
 
 function App() {
@@ -155,14 +156,14 @@ function App() {
           {/* Hero Section - Critical, load immediately */}
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton variant="hero" />}>
-              <Hero />
+              <EnhancedHero />
             </Suspense>
           </ErrorBoundary>
 
           {/* Stats Section */}
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton height="300px" />}>
-              <Stats />
+              <StatsSection />
             </Suspense>
           </ErrorBoundary>
 
@@ -197,7 +198,7 @@ function App() {
           {/* Projects Section */}
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton variant="grid" />}>
-              <Projects />
+              <EnhancedProjects />
             </Suspense>
           </ErrorBoundary>
 
@@ -218,14 +219,14 @@ function App() {
           {/* Testimonials */}
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton variant="card" />}>
-              <Testimonials />
+              <EnhancedTestimonials />
             </Suspense>
           </ErrorBoundary>
 
           {/* Contact Section */}
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton height="600px" />}>
-              <Contact />
+              <EnhancedContact />
             </Suspense>
           </ErrorBoundary>
         </main>

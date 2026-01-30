@@ -24,14 +24,14 @@ const About = () => {
       school: "S R Junior College",
       degree: "Intermediate Education (1st & 2nd Year)",
       location: "Telangana, India",
-      year: "",
+      year: "2021 - 2023",
       details: ""
     },
     {
       school: "Sharada Vidya Bhavan High School",
       degree: "Secondary School Education",
       location: "Telangana, India",
-      year: "",
+      year: "2021",
       details: ""
     }
   ];
