@@ -62,12 +62,55 @@ const About = () => {
               className="relative flex justify-center md:justify-start"
             >
               <div className="absolute inset-0 bg-[--color-accent] rounded-full blur-2xl opacity-20 transform scale-90"></div>
-              <div className="relative w-64 h-64 md:w-80 md:h-80 box-border p-2 rounded-full border-4 border-[--color-surface] shadow-2xl bg-[--color-surface]">
-                <img
-                  src="/profile.jpg"
-                  alt="Valluri Rahul"
-                  className="w-full h-full object-cover rounded-full"
+              <div className="relative group w-64 h-64 md:w-80 md:h-80">
+                {/* Tech Rings - Rotating */}
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  className="absolute -inset-4 border border-dashed border-[--color-accent]/30 rounded-full z-0 group-hover:border-[--color-accent]/60 transition-colors"
                 />
+                <motion.div
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                  className="absolute -inset-2 border border-dotted border-[--color-primary]/30 rounded-full z-0 group-hover:border-[--color-primary]/60 transition-colors"
+                />
+
+                {/* Main Image Container */}
+                <div className="relative w-full h-full rounded-full border-4 border-[--color-surface] shadow-2xl bg-[--color-surface] overflow-hidden cursor-pointer z-10 filter group-hover:shadow-[0_0_30px_rgba(var(--color-accent-rgb),0.3)] transition-all duration-500">
+                  {/* Real Photo */}
+                  <img
+                    src="/profile.jpg"
+                    alt="Valluri Rahul"
+                    className="w-full h-full object-cover rounded-full transition-transform duration-700 group-hover:scale-105"
+                  />
+
+                  {/* Sketch/Blueprint Reveal */}
+                  <motion.div
+                    className="absolute inset-0 w-full h-full bg-[--color-surface]"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <img
+                      src="/profile-hover.png"
+                      alt="Valluri Rahul Sketch"
+                      className="w-full h-full object-cover opacity-90"
+                    />
+                    {/* Blueprint Overlay Tint */}
+                    <div className="absolute inset-0 bg-blue-500/10 mix-blend-overlay" />
+                    <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0)_50%,rgba(0,0,0,0.2)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,6px_100%] pointer-events-none" />
+                  </motion.div>
+
+                  {/* Scanning Laser Line */}
+                  <motion.div
+                    className="absolute w-full h-[2px] bg-[--color-accent] shadow-[0_0_15px_var(--color-accent)] opacity-0 group-hover:opacity-100"
+                    initial={{ top: "-10%" }}
+                    whileHover={{
+                      top: ["0%", "100%"],
+                      transition: { duration: 1.5, repeat: Infinity, ease: "linear" }
+                    }}
+                  />
+                </div>
               </div>
             </motion.div>
 
