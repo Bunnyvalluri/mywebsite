@@ -76,9 +76,9 @@ const Header = ({ darkMode, toggleTheme }) => {
   };
 
   return (
-    <header className={`fixed top-0 w-full z-[9999] transition-all duration-500 ${scrolled || isOpen
-      ? 'glass-strong shadow-lg shadow-black/5'
-      : 'bg-transparent'
+    <header className={`fixed top-0 w-full z-[9999] transition-all duration-500 border-b ${scrolled || isOpen
+      ? 'bg-white/90 dark:bg-[#09090b]/90 backdrop-blur-md shadow-sm border-[--color-border-custom]'
+      : 'bg-transparent border-transparent'
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
@@ -113,16 +113,16 @@ const Header = ({ darkMode, toggleTheme }) => {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}
-                  className={`relative px-4 py-2 font-medium text-sm transition-all duration-300 rounded-lg cursor-pointer ${isActive
-                    ? 'text-[--color-accent]'
-                    : 'text-[--color-secondary] hover:text-[--color-primary]'
+                  className={`relative px-4 py-2 font-medium text-sm transition-all duration-300 rounded-full cursor-pointer ${isActive
+                    ? 'text-white' // Active text color fixed to white for contrast against accent bg
+                    : 'text-[--color-text-main] hover:text-[--color-accent]'
                     }`}
                 >
-                  {link.name}
+                  <span className="relative z-10">{link.name}</span>
                   {isActive && (
                     <motion.div
                       layoutId="activeSection"
-                      className="absolute inset-0 bg-[--color-accent]/10 rounded-lg -z-10"
+                      className="absolute inset-0 bg-gradient-to-r from-[--color-accent] to-[--color-accent-secondary] rounded-full -z-0 shadow-md"
                       initial={false}
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
@@ -136,7 +136,7 @@ const Header = ({ darkMode, toggleTheme }) => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
               onClick={toggleTheme}
-              className="ml-4 p-3 rounded-xl glass hover:glass-strong text-[--color-primary] transition-all duration-300 hover:scale-110 hover:rotate-12"
+              className="ml-4 p-2.5 rounded-full border border-[--color-border-custom] text-[--color-primary] hover:bg-[--color-surface] hover:border-[--color-accent] transition-all duration-300 active:scale-95"
               aria-label="Toggle Theme"
             >
               <motion.div
@@ -153,7 +153,7 @@ const Header = ({ darkMode, toggleTheme }) => {
           <div className="md:hidden flex items-center gap-3">
             <button
               onClick={toggleTheme}
-              className="p-3 rounded-xl glass hover:glass-strong text-[--color-primary] transition-all"
+              className="p-2.5 rounded-full border border-[--color-border-custom] text-[--color-primary] hover:bg-[--color-surface] transition-all"
               aria-label="Toggle Theme"
             >
               {darkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
@@ -161,7 +161,7 @@ const Header = ({ darkMode, toggleTheme }) => {
 
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-3 rounded-xl glass hover:glass-strong text-[--color-primary] transition-all relative z-50"
+              className="p-2.5 rounded-full border border-[--color-border-custom] text-[--color-primary] hover:bg-[--color-surface] transition-all relative z-50"
               aria-label="Toggle menu"
             >
               <AnimatePresence mode="wait" initial={false}>
@@ -188,7 +188,7 @@ const Header = ({ darkMode, toggleTheme }) => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }} // Apple ease-out curve
-            className="md:hidden fixed inset-0 top-[80px] z-[9998] bg-[--color-background-custom]/95 backdrop-blur-3xl border-t border-[--color-border-custom]"
+            className="md:hidden fixed inset-0 top-[80px] z-[9998] bg-white/95 dark:bg-[#09090b]/95 backdrop-blur-xl border-t border-[--color-border-custom]"
           >
             <div className="flex flex-col h-full overflow-y-auto p-6 pb-32">
               <div className="space-y-2 max-w-md mx-auto w-full">
@@ -202,8 +202,8 @@ const Header = ({ darkMode, toggleTheme }) => {
                       key={link.name}
                       href={link.href}
                       onClick={(e) => handleNavClick(e, link.href)}
-                      className={`block px-6 py-5 rounded-2xl text-xl font-semibold transition-all ${isActive
-                        ? 'bg-[--color-accent]/10 text-[--color-accent] scale-[1.02]'
+                      className={`block px-6 py-4 rounded-xl text-lg font-semibold transition-all ${isActive
+                        ? 'bg-gradient-to-r from-[--color-accent] to-[--color-accent-secondary] text-white shadow-lg'
                         : 'text-[--color-text-main] hover:bg-[--color-surface] active:scale-95'
                         }`}
                     >
