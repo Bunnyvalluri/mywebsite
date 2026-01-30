@@ -8,19 +8,17 @@ import CodeRain from './CodeRain';
 const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
-      {/* Background Effects */}
-      <ParticleBackground />
-      <div className="absolute inset-0 z-0">
-        <CodeRain />
-      </div>
+      {/* Removed heavy background effects for performance */}
+      {/* <ParticleBackground /> */}
+      {/* <CodeRain /> */}
 
       {/* Premium Mesh Gradient Background */}
       <div className="absolute inset-0 bg-[--color-background-custom] -z-10" style={{ background: 'var(--gradient-mesh)' }} />
 
-      {/* Animated Gradient Orbs */}
-      <div className="absolute top-20 -left-20 w-96 h-96 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-full blur-3xl animate-blob" />
-      <div className="absolute bottom-20 -right-20 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-3xl animate-blob" style={{ animationDelay: '2s' }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-full blur-3xl animate-pulse-slow" />
+      {/* Simplified Gradient Orbs - Static */}
+      <div className="absolute top-20 -left-20 w-96 h-96 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 -right-20 w-96 h-96 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 rounded-full blur-3xl" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center w-full z-10 gap-12">
         {/* Left Content */}
@@ -110,39 +108,28 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Right Content - Enhanced 3D Visualization */}
+        {/* Right Content - Simplified 3D Visualization */}
         <div className="hidden md:flex w-2/5 h-[600px] items-center justify-center relative">
           <div className="relative w-[500px] h-[500px] flex items-center justify-center perspective-container">
 
-            {/* Central Core with Glow */}
-            <motion.div
-              animate={{
-                scale: [1, 1.2, 1],
-                rotate: [0, 180, 360]
-              }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute w-40 h-40 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full blur-3xl opacity-40 z-0"
-            />
+            {/* Central Core - Static Glow */}
+            <div className="absolute w-40 h-40 bg-gradient-to-br from-indigo-500/30 to-purple-600/30 rounded-full blur-3xl opacity-40 z-0" />
 
-            <motion.div
-              animate={{ rotate: [0, 360] }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="relative z-10 w-32 h-32 glass-strong rounded-3xl border-2 border-[--color-accent]/50 flex items-center justify-center shadow-2xl animate-glow"
-            >
+            <div className="relative z-10 w-32 h-32 glass-strong rounded-3xl border-2 border-[--color-accent]/50 flex items-center justify-center shadow-2xl">
               <span className="text-5xl font-black gradient-text">&lt;/&gt;</span>
-            </motion.div>
+            </div>
 
-            {/* Orbit Ring 1 - React & Frontend */}
+            {/* Orbit Ring 1 - React & Frontend - Slower Animation */}
             <motion.div
               animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
               className="absolute w-72 h-72 border-2 border-indigo-500/20 rounded-full flex items-center justify-center"
             >
               <motion.div
                 className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4 glass-strong rounded-2xl shadow-xl border border-blue-500/30"
                 whileHover={{ scale: 1.2 }}
               >
-                <FaReact className="text-3xl text-[#61DAFB]" style={{ animation: 'spin 3s linear infinite' }} />
+                <FaReact className="text-3xl text-[#61DAFB]" />
               </motion.div>
               <motion.div
                 className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 p-4 glass-strong rounded-2xl shadow-xl border border-yellow-500/30"
@@ -152,10 +139,10 @@ const Hero = () => {
               </motion.div>
             </motion.div>
 
-            {/* Orbit Ring 2 - Backend & Tools */}
+            {/* Orbit Ring 2 - Backend & Tools - Slower Animation */}
             <motion.div
               animate={{ rotate: -360 }}
-              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
               className="absolute w-[28rem] h-[28rem] border-2 border-purple-500/20 rounded-full flex items-center justify-center"
             >
               <motion.div
@@ -172,28 +159,7 @@ const Hero = () => {
               </motion.div>
             </motion.div>
 
-            {/* Floating Particles - Enhanced */}
-            {[...Array(8)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-3 h-3 rounded-full"
-                style={{
-                  background: `linear-gradient(135deg, ${i % 2 === 0 ? '#6366f1' : '#8b5cf6'}, ${i % 2 === 0 ? '#8b5cf6' : '#6366f1'})`
-                }}
-                animate={{
-                  x: [0, Math.random() * 300 - 150],
-                  y: [0, Math.random() * 300 - 150],
-                  opacity: [0, 0.8, 0],
-                  scale: [0, 1.5, 0]
-                }}
-                transition={{
-                  duration: 4 + Math.random() * 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: Math.random() * 3
-                }}
-              />
-            ))}
+            {/* Removed Floating Particles for Performance */}
 
           </div>
         </div>

@@ -16,21 +16,21 @@ const About = () => {
     {
       school: "Narsimha Reddy Engineering College",
       degree: "Bachelor of Technology in Computer Science and Engineering",
-      location: "Hyderabad, India",
+      location: "Hyderabad, India.",
       year: "Expected August 2027",
       details: "Relevant Coursework: Data Structures & Algorithms, Database Management Systems, Operating Systems, Computer Networks"
     },
     {
       school: "S R Junior College",
       degree: "Intermediate Education (1st & 2nd Year)",
-      location: "Telangana, India",
+      location: "Telangana, India.",
       year: "2021 - 2023",
       details: ""
     },
     {
       school: "Sharada Vidya Bhavan High School",
       degree: "Secondary School Education",
-      location: "Telangana, India",
+      location: "Telangana, India.",
       year: "2021",
       details: ""
     }
@@ -203,22 +203,22 @@ const About = () => {
             <SkillsRadar />
           </div>
 
-          {/* Infinite Marquee of Icons */}
+          {/* Simplified Marquee of Icons - Performance Optimized */}
           <div className="flex mb-12 overflow-hidden mask-image-gradient py-4">
             <motion.div
               className="flex gap-12 whitespace-nowrap"
-              animate={{ x: [0, -1000] }}
+              animate={{ x: [0, -800] }}
               transition={{
                 repeat: Infinity,
                 ease: "linear",
-                duration: 25
+                duration: 30
               }}
             >
-              {[...skills, ...skills, ...skills].map((skill, index) => {
+              {[...skills, ...skills].map((skill, index) => {
                 const Icon = skill.icon;
                 return (
                   <div key={index} className="flex flex-col items-center gap-3 group px-4">
-                    <div className="w-20 h-20 rounded-2xl bg-[--color-surface] border border-[--color-border-custom] flex items-center justify-center text-4xl shadow-md group-hover:scale-110 transition-transform duration-300 group-hover:border-[--color-accent] group-hover:shadow-xl group-hover:-translate-y-2"
+                    <div className="w-20 h-20 rounded-2xl bg-[--color-surface] border border-[--color-border-custom] flex items-center justify-center text-4xl shadow-md group-hover:scale-110 transition-transform duration-300 group-hover:border-[--color-accent]"
                       style={{ color: skill.color }}>
                       <Icon />
                     </div>

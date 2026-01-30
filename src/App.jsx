@@ -11,27 +11,27 @@ import {
 } from './components/LazyLoadWrapper';
 
 // Lazy load components for better performance
-// Standard components (commented out in favor of Enhanced versions)
-// const Hero = lazy(() => import('./components/Hero'));
-// const Stats = lazy(() => import('./components/Stats'));
+// Standard components - Using original versions
+const Hero = lazy(() => import('./components/Hero'));
+const Stats = lazy(() => import('./components/Stats'));
 const About = lazy(() => import('./components/About'));
 const Services = lazy(() => import('./components/Services'));
 const ProcessShowcase = lazy(() => import('./components/ProcessShowcase'));
 const Certifications = lazy(() => import('./components/Certifications'));
-// const Projects = lazy(() => import('./components/Projects'));
+const Projects = lazy(() => import('./components/Projects'));
 const ClientLogos = lazy(() => import('./components/ClientLogos'));
-// const Testimonials = lazy(() => import('./components/Testimonials'));
-// const Contact = lazy(() => import('./components/Contact'));
+const Testimonials = lazy(() => import('./components/Testimonials'));
+const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
 const LiveChat = lazy(() => import('./components/LiveChat'));
 import AppleLoader from './components/AppleLoader';
 
-// Enhanced lazy load components
-const EnhancedHero = lazy(() => import('./components/EnhancedHero'));
-const StatsSection = lazy(() => import('./components/StatsSection'));
-const EnhancedProjects = lazy(() => import('./components/EnhancedProjects'));
-const EnhancedTestimonials = lazy(() => import('./components/EnhancedTestimonials'));
-const EnhancedContact = lazy(() => import('./components/EnhancedContact'));
+// Enhanced lazy load components (commented out)
+// const EnhancedHero = lazy(() => import('./components/EnhancedHero'));
+// const StatsSection = lazy(() => import('./components/StatsSection'));
+// const EnhancedProjects = lazy(() => import('./components/EnhancedProjects'));
+// const EnhancedTestimonials = lazy(() => import('./components/EnhancedTestimonials'));
+// const EnhancedContact = lazy(() => import('./components/EnhancedContact'));
 const ThreeDCharacterShowcase = lazy(() => import('./components/ThreeDCharacterShowcase'));
 
 function App() {
@@ -109,37 +109,19 @@ function App() {
         {isLoading && <AppleLoader onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
 
-      {/* Cinematic Background Mesh */}
-      <div className="fixed inset-0 z-0 pointer-events-none transition-opacity duration-500">
+      {/* Simplified Background - Performance Optimized */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        {/* LIGHT MODE: Simple Static Gradient */}
+        <div className="absolute inset-0 dark:hidden bg-gradient-to-br from-indigo-50/30 via-white to-blue-50/30"></div>
 
-        {/* LIGHT MODE: Professional Engineering Grid + Aurora */}
-        <div className="absolute inset-0 dark:hidden">
-          {/* Technical Grid Pattern - Static and Performant */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-
-          {/* Subtle Breathing Aurora - Only on Desktop */}
-          <div className="hidden md:block absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-gradient-to-br from-indigo-100/50 via-transparent to-blue-100/50 animate-spin-slow opacity-60"></div>
-
-          {/* Mobile Static Gradient - Lighter */}
-          <div className="md:hidden absolute inset-0 bg-gradient-to-b from-indigo-50/50 to-white/50"></div>
-        </div>
-
-        {/* DARK MODE: vivid Cyberpunk Blobs */}
-        <div className="hidden dark:block opacity-20">
-          {/* Only animate on Desktop */}
-          <div className="hidden md:block absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-[--color-accent] blur-[120px] animate-pulse-slow"></div>
-          <div className="hidden md:block absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-[--color-success] blur-[120px] animate-pulse-slow delay-1000"></div>
-          <div className="hidden md:block absolute top-[40%] left-[40%] w-[30%] h-[30%] rounded-full bg-purple-500 blur-[100px] animate-blob"></div>
-
-          {/* Mobile Static Glow - Optimized */}
-          <div className="md:hidden absolute top-0 left-0 w-full h-1/2 bg-[--color-accent]/10 blur-[80px]"></div>
-          <div className="md:hidden absolute bottom-0 right-0 w-full h-1/2 bg-[--color-success]/10 blur-[80px]"></div>
-        </div>
+        {/* DARK MODE: Simple Static Gradient */}
+        <div className="hidden dark:block absolute inset-0 bg-gradient-to-br from-[--color-background-custom] via-purple-950/10 to-[--color-background-custom]"></div>
       </div>
 
-      <Suspense fallback={null}>
+      {/* Disabled for Performance - Uncomment if needed */}
+      {/* <Suspense fallback={null}>
         <MagneticCursor />
-      </Suspense>
+      </Suspense> */}
 
       <Suspense fallback={null}>
         <ScrollProgressIndicator />
@@ -156,14 +138,14 @@ function App() {
           {/* Hero Section - Critical, load immediately */}
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton variant="hero" />}>
-              <EnhancedHero />
+              <Hero />
             </Suspense>
           </ErrorBoundary>
 
           {/* Stats Section */}
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton height="300px" />}>
-              <StatsSection />
+              <Stats />
             </Suspense>
           </ErrorBoundary>
 
@@ -181,12 +163,12 @@ function App() {
             </Suspense>
           </ErrorBoundary>
 
-          {/* 3D Character Showcase */}
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
+          {/* 3D Character Showcase - Disabled for Performance */}
+          {/* <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton height="500px" />}>
               <ThreeDCharacterShowcase />
             </Suspense>
-          </ErrorBoundary>
+          </ErrorBoundary> */}
 
           {/* Process Showcase */}
           <ErrorBoundary FallbackComponent={ErrorFallback}>
@@ -198,7 +180,7 @@ function App() {
           {/* Projects Section */}
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton variant="grid" />}>
-              <EnhancedProjects />
+              <Projects />
             </Suspense>
           </ErrorBoundary>
 
@@ -219,14 +201,14 @@ function App() {
           {/* Testimonials */}
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton variant="card" />}>
-              <EnhancedTestimonials />
+              <Testimonials />
             </Suspense>
           </ErrorBoundary>
 
           {/* Contact Section */}
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton height="600px" />}>
-              <EnhancedContact />
+              <Contact />
             </Suspense>
           </ErrorBoundary>
         </main>
