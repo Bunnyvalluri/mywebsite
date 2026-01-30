@@ -2,70 +2,55 @@ import { motion } from 'framer-motion';
 import { FaCode, FaLightbulb, FaRocket, FaCheckCircle } from 'react-icons/fa';
 
 const ProcessShowcase = () => {
-  const processes = [
+  const steps = [
     {
-      number: '01',
+      id: "01",
+      title: "Discovery & Strategy",
+      subtitle: "Understanding the Vision",
       icon: FaLightbulb,
-      title: 'Discovery & Planning',
-      description: 'Understanding your vision, goals, and requirements through detailed consultation and research.',
-      deliverables: ['Project Roadmap', 'Technical Specifications', 'Timeline & Milestones'],
-      color: 'from-yellow-500 to-orange-500'
+      description: "We start by deep-diving into your requirements, business goals, and target audience to define a rock-solid technical strategy.",
+      deliverables: ["Technical Specification", "Project Roadmap", "Architecture Diagram"],
+      color: "blue"
     },
     {
-      number: '02',
+      id: "02",
+      title: "Architecture & Design",
+      subtitle: "Blueprints & Systems",
       icon: FaCode,
-      title: 'Design & Development',
-      description: 'Crafting pixel-perfect designs and writing clean, scalable code with best practices.',
-      deliverables: ['UI/UX Design', 'Frontend Development', 'Backend Architecture'],
-      color: 'from-blue-500 to-cyan-500'
+      description: "Designing scalable system architectures and intuitive UI/UX prototypes that align with modern web standards.",
+      deliverables: ["High-Fidelity Mockups", "Database Schema", "API Contract"],
+      color: "purple"
     },
     {
-      number: '03',
-      icon: FaCheckCircle,
-      title: 'Testing & Quality Assurance',
-      description: 'Rigorous testing across devices and browsers to ensure flawless performance.',
-      deliverables: ['Cross-browser Testing', 'Performance Optimization', 'Security Audit'],
-      color: 'from-green-500 to-emerald-500'
+      id: "03",
+      title: "Agile Development",
+      subtitle: "Sprint-Based Execution",
+      icon: FaCode, // Using reusable icon or import specific ones
+      description: "Iterative development with bi-weekly sprints, ensuring continuous feedback and transparent progress tracking.",
+      deliverables: ["Clean, Tested Code", "CI/CD Setup", "Regular Demos"],
+      color: "pink"
     },
     {
-      number: '04',
+      id: "04",
+      title: "Launch & Scale",
+      subtitle: "Production Ready",
       icon: FaRocket,
-      title: 'Launch & Support',
-      description: 'Smooth deployment and ongoing support to ensure your success.',
-      deliverables: ['Deployment', 'Documentation', 'Maintenance & Updates'],
-      color: 'from-purple-500 to-pink-500'
+      description: "Seamless deployment to production environments with rigorous performance testing and monitoring setup.",
+      deliverables: ["Production Deployment", "Documentation", "Post-Launch Support"],
+      color: "emerald"
     }
   ];
 
   return (
-    <section id="process" className="py-20 bg-[--color-background-custom] relative overflow-hidden">
-      {/* Animated Background Decoration */}
-      <div className="absolute inset-0 opacity-5">
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 90, 0]
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.3, 1],
-            rotate: [0, -90, 0]
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full blur-3xl"
-        />
-      </div>
+    <section id="process" className="py-24 relative bg-[--color-background-custom] overflow-hidden">
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(var(--color-border-custom) 1px, transparent 1px),
+                           linear-gradient(90deg, var(--color-border-custom) 1px, transparent 1px)`,
+          backgroundSize: '40px 40px',
+        }}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -73,194 +58,143 @@ const ProcessShowcase = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-24"
         >
-          <motion.h2
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-5xl font-black text-[--color-primary] mb-4"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
-            My <span className="gradient-text">Process</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="text-[--color-text-muted] max-w-2xl mx-auto text-lg"
-          >
-            A proven methodology that delivers exceptional results every time.
-          </motion.p>
+          <span className="inline-block px-4 py-2 rounded-full bg-[--color-accent]/10 text-[--color-accent] font-bold text-sm mb-4 tracking-wider uppercase">
+            How We Work
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-[--color-primary] mb-6 tracking-tight">
+            Development <span className="gradient-text">Workflow</span>
+          </h2>
+          <p className="text-[--color-text-muted] max-w-2xl mx-auto text-xl leading-relaxed">
+            An agile, transparent application lifecycle designed to deliver high-quality software on time and within budget.
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {processes.map((process, index) => {
-            const Icon = process.icon;
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 60, scale: 0.8 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{
-                  duration: 0.7,
-                  delay: index * 0.15,
-                  type: "spring",
-                  stiffness: 100
-                }}
-                viewport={{ once: true }}
-                className="relative group perspective-container"
-              >
-                {/* Animated Connecting Line */}
-                {index < processes.length - 1 && (
-                  <motion.div
-                    initial={{ scaleX: 0 }}
-                    whileInView={{ scaleX: 1 }}
-                    transition={{ duration: 0.8, delay: index * 0.15 + 0.5 }}
-                    viewport={{ once: true }}
-                    className="hidden lg:block absolute top-12 left-full w-full h-0.5 bg-gradient-to-r from-[--color-accent] to-transparent -z-10 origin-left"
-                  >
-                    {/* Animated Dot */}
-                    <motion.div
-                      animate={{
-                        x: [0, 100, 0],
-                        opacity: [0, 1, 0]
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        delay: index * 0.5
-                      }}
-                      className="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-[--color-accent] rounded-full"
-                    />
-                  </motion.div>
-                )}
+        {/* Timeline Desktop View */}
+        <div className="relative hidden lg:block">
+          {/* Connecting Line */}
+          <div className="absolute top-1/2 left-0 w-full h-1 bg-[--color-border-custom] -translate-y-1/2 z-0" />
 
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="card-premium card-3d hover-lift-3d p-6 rounded-2xl h-full relative overflow-hidden"
-                >
-                  {/* Animated Background Gradient */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 0.1 }}
-                    transition={{ duration: 0.3 }}
-                    className={`absolute inset-0 bg-gradient-to-br ${process.color}`}
-                  />
+          <div className="grid grid-cols-4 gap-8">
+            {steps.map((step, index) => (
+              <TimelineStep key={index} step={step} index={index} />
+            ))}
+          </div>
+        </div>
 
-                  {/* Number Badge with Animation */}
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 0.1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: index * 0.15 + 0.3 }}
-                    viewport={{ once: true }}
-                    className="absolute top-4 right-4 text-6xl font-black text-[--color-accent]"
-                    style={{ fontFamily: 'var(--font-display)' }}
-                  >
-                    {process.number}
-                  </motion.div>
-
-                  {/* Animated Icon */}
-                  <motion.div
-                    initial={{ rotate: -180, scale: 0 }}
-                    whileInView={{ rotate: 0, scale: 1 }}
-                    transition={{
-                      duration: 0.6,
-                      delay: index * 0.15 + 0.2,
-                      type: "spring"
-                    }}
-                    whileHover={{
-                      rotate: 360,
-                      scale: 1.1
-                    }}
-                    viewport={{ once: true }}
-                    className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${process.color} flex items-center justify-center text-white mb-4 shadow-xl relative z-10`}
-                  >
-                    <Icon className="text-2xl" />
-                    {/* Pulsing Ring */}
-                    <motion.div
-                      animate={{
-                        scale: [1, 1.5, 1],
-                        opacity: [0.5, 0, 0.5]
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: index * 0.3
-                      }}
-                      className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${process.color}`}
-                    />
-                  </motion.div>
-
-                  {/* Content */}
-                  <motion.h3
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.15 + 0.4 }}
-                    viewport={{ once: true }}
-                    className="text-xl font-bold text-[--color-primary] mb-3 group-hover:gradient-text transition-all relative z-10"
-                  >
-                    {process.title}
-                  </motion.h3>
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: index * 0.15 + 0.5 }}
-                    viewport={{ once: true }}
-                    className="text-[--color-text-muted] text-sm mb-4 leading-relaxed relative z-10"
-                  >
-                    {process.description}
-                  </motion.p>
-
-                  {/* Deliverables with Staggered Animation */}
-                  <div className="space-y-2 relative z-10">
-                    <motion.p
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      transition={{ duration: 0.5, delay: index * 0.15 + 0.6 }}
-                      viewport={{ once: true }}
-                      className="text-xs font-bold text-[--color-accent] uppercase tracking-wide"
-                    >
-                      Deliverables:
-                    </motion.p>
-                    {process.deliverables.map((item, idx) => (
-                      <motion.div
-                        key={idx}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{
-                          duration: 0.4,
-                          delay: index * 0.15 + 0.7 + idx * 0.1
-                        }}
-                        viewport={{ once: true }}
-                        className="flex items-center gap-2 text-xs text-[--color-text-main]"
-                      >
-                        <motion.div
-                          animate={{
-                            scale: [1, 1.3, 1],
-                          }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            delay: idx * 0.2
-                          }}
-                          className="w-1.5 h-1.5 rounded-full bg-[--color-success]"
-                        />
-                        <span>{item}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </motion.div>
-              </motion.div>
-            );
-          })}
+        {/* Timeline Mobile View */}
+        <div className="lg:hidden space-y-12">
+          {steps.map((step, index) => (
+            <TimelineCardMobile key={index} step={step} index={index} />
+          ))}
         </div>
       </div>
     </section>
   );
 };
+
+// Desktop Timeline Step
+const TimelineStep = ({ step, index }) => {
+  const Icon = step.icon;
+  const isEven = index % 2 === 0;
+
+  return (
+    <div className="relative z-10">
+      <div className={`flex flex-col items-center ${isEven ? 'flex-col-reverse' : ''}`}>
+
+        {/* Content Card (Top or Bottom) */}
+        <motion.div
+          initial={{ opacity: 0, y: isEven ? 50 : -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.2 }}
+          viewport={{ once: true }}
+          className={`relative w-full p-6 bg-[--color-surface] border border-[--color-border-custom] rounded-2xl shadow-lg hover:border-[--color-accent] transition-all duration-300 group ${isEven ? 'mb-12' : 'mt-12'}`}
+        >
+          <div className="absolute -inset-px bg-gradient-to-r from-transparent via-[--color-accent] to-transparent opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-2xl pointer-events-none" />
+
+          <span className="text-5xl font-black text-[--color-border-custom]/50 absolute top-4 right-4 z-0">
+            {step.id}
+          </span>
+
+          <div className="relative z-10">
+            <h3 className="text-xl font-bold text-[--color-primary] mb-1">{step.title}</h3>
+            <p className="text-xs font-bold text-[--color-accent] uppercase tracking-wider mb-3">{step.subtitle}</p>
+            <p className="text-[--color-text-muted] text-sm leading-relaxed mb-4">
+              {step.description}
+            </p>
+
+            {/* Deliverables */}
+            <div className="pt-4 border-t border-[--color-border-custom]">
+              <p className="text-xs font-bold text-[--color-primary] mb-2 uppercase">Deliverables:</p>
+              <ul className="space-y-1">
+                {step.deliverables.slice(0, 2).map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-2 text-xs text-[--color-text-muted]">
+                    <FaCheckCircle className="text-[--color-success] text-[10px]" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Arrow Pointer */}
+          <div className={`absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-[--color-surface] border-l border-t border-[--color-border-custom] transform rotate-45 ${isEven ? '-bottom-2 border-b-0 border-r-0' : '-top-2 border-l-0 border-t-0 border-b border-r'}`}></div>
+        </motion.div>
+
+        {/* Center Node */}
+        <motion.div
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1 }}
+          transition={{ duration: 0.4, delay: index * 0.2 + 0.2 }}
+          viewport={{ once: true }}
+          className={`w-14 h-14 rounded-full border-4 border-[--color-background-custom] bg-[--color-surface] shadow-xl flex items-center justify-center relative z-20 group cursor-pointer my-auto`}
+        >
+          <div className={`absolute inset-0 rounded-full bg-gradient-to-br from-${step.color}-500 to-${step.color}-600 opacity-20 group-hover:opacity-100 transition-opacity duration-300`} />
+          <Icon className={`text-xl text-[--color-primary] group-hover:text-white transition-colors duration-300 relative z-10`} />
+        </motion.div>
+
+      </div>
+    </div>
+  )
+}
+
+// Mobile Timeline Card
+const TimelineCardMobile = ({ step, index }) => {
+  const Icon = step.icon;
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      className="flex gap-4"
+    >
+      <div className="flex flex-col items-center">
+        <div className={`w-10 h-10 rounded-full bg-[--color-surface] border border-[--color-border-custom] flex items-center justify-center shrink-0 z-10`}>
+          <span className="font-bold text-sm text-[--color-primary]">{step.id}</span>
+        </div>
+        {index !== 3 && <div className="w-0.5 flex-1 bg-[--color-border-custom] my-2" />}
+      </div>
+
+      <div className="bg-[--color-surface] border border-[--color-border-custom] rounded-xl p-6 flex-1 shadow-sm">
+        <div className="flex items-center gap-3 mb-3">
+          <Icon className="text-[--color-accent] text-xl" />
+          <h3 className="text-lg font-bold text-[--color-primary]">{step.title}</h3>
+        </div>
+        <p className="text-[--color-text-muted] text-sm leading-relaxed mb-4">
+          {step.description}
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {step.deliverables.map((item, idx) => (
+            <span key={idx} className="text-xs px-2 py-1 bg-[--color-background-custom] rounded text-[--color-text-muted] border border-[--color-border-custom]">
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  )
+}
 
 export default ProcessShowcase;
