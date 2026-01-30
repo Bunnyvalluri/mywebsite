@@ -65,49 +65,49 @@ const LiveChat = () => {
   const getBotResponse = (input) => {
     const lowerInput = input.toLowerCase();
 
-    // About Rahul - Professional Intro
+    // About Rahul
     if (lowerInput.includes('who') || lowerInput.includes('about')) {
-      return "I'm Valluri Rahul, a Full-Stack Software Engineer tailored for enterprise solutions. I specialize in building high-performance, scalable web applications that drive business growth. My focus is on delivering clean code, exceptional user experiences, and robust security. 🚀";
+      return "I'm Valluri Rahul, a Computer Science student and Full-Stack Developer from Hyderabad, India. I specialize in building responsive web applications using modern technologies like React, Node.js, and cloud platforms. I'm passionate about creating exceptional digital experiences! 🚀";
     }
 
-    // Skills & Tech Stack - Enterprise-Grade
+    // Skills & Tech Stack
     else if (lowerInput.includes('skill') || lowerInput.includes('tech')) {
-      return "I bring a comprehensive modern tech stack to your projects:\n\n💻 Frontend Architecture: React.js, Next.js, Tailwind CSS (focused on Core Web Vitals)\n⚙️ Backend Systems: Node.js, Express, Secure RESTful APIs\n☁️ Infrastructure: AWS, Vercel, Docker, CI/CD Pipelines\n🗄️ Data: MongoDB, PostgreSQL (Schema Design & Optimization)\n\nI ensure your tech stack is future-proof and scalable.";
+      return "My technical skills include:\n\n💻 Frontend: React, JavaScript, HTML5, CSS3, Bootstrap, jQuery\n⚙️ Backend: Node.js, Express.js\n🗄️ Database: MongoDB, MySQL\n☁️ Cloud: AWS\n🔧 Tools: Git, GitHub\n\nI have 90% proficiency in JavaScript, 85% in React, and 80% in Node.js!";
     }
 
-    // Projects - Case Studies Focus
+    // Projects
     else if (lowerInput.includes('project')) {
-      return "I have delivered several impactful projects:\n\n1. 🛡️ Cloud Guard: An enterprise-grade cloud security platform ensuring 99.9% uptime.\n2. 🦋 3D Visualisations: High-performance interactive 3D web experiences running at 60fps.\n3. 🌱 Green Quest: A gamified engagement platform demonstrating complex state management.\n\nAll projects follow industry best practices for code quality and maintainability. You can view live demos in the Projects section!";
+      return "I've built several impressive projects:\n\n1. 🛡️ Cloud Guard - Cloud Security Posture Management Platform with 99.9% uptime\n2. 🦋 3D Butterfly Animation - Interactive CSS & JavaScript animation with 60fps performance\n3. 🌱 Green Quest - Environmental awareness platform with gamification\n\nScroll to the Projects section to see live demos and GitHub repos!";
     }
 
-    // Services - Value Proposition
+    // Services
     else if (lowerInput.includes('service') || lowerInput.includes('offer')) {
-      return "I provide end-to-end software development services:\n\n🚀 Custom Web Application Development: From concept to launch.\n🎨 Enterprise UI/UX Implementation: Pixel-perfect, accessible designs.\n🔒 Secure Backend Architecture: Scalable APIs and database management.\n🔧 Performance Optimization: Speeding up existing applications for better conversion.\n\nI treat every project as a partnership to ensure your business goals are met.";
+      return "I offer professional services in:\n\n🎨 Frontend Development - React, responsive design\n⚙️ Backend Development - Node.js, RESTful APIs\n🔒 Security Solutions - Cloud security, best practices\n🌐 Full-Stack Development - End-to-end solutions\n\nCheck the Services section for more details!";
     }
 
-    // Education - Foundation
+    // Education
     else if (lowerInput.includes('education') || lowerInput.includes('study') || lowerInput.includes('college')) {
-      return "📚 Educational Background:\n\n🎓 B.Tech in Computer Science & Engineering\nNarsimha Reddy Engineering College\nexpected 2027\n\nMy academic foundation is strengthened by continuous professional development in modern software architecture and algorithms.";
+      return "📚 Education:\n\n🎓 Bachelor of Technology in Computer Science\nNarsimha Reddy Engineering College, Hyderabad\nExpected: August 2027\n\nRelevant Coursework: Data Structures & Algorithms, DBMS, Operating Systems, Computer Networks";
     }
 
-    // Experience - Professional Track Record
+    // Experience
     else if (lowerInput.includes('experience') || lowerInput.includes('work')) {
-      return "💼 Professional Experience:\n\n✅ 6+ Months of Hands-on Development: Delivered production-ready code.\n✅ Agile Methodology: Experienced in sprints, daily standups, and iterative delivery.\n✅ Quality Assurance: rigorous testing and code review processes.\n\nI bring a 'zero-bug' mindset to development, minimizing post-launch issues.";
+      return "💼 Key Achievements:\n\n✅ Developed responsive web apps using React and Node.js\n✅ Collaborated with cross-functional teams\n✅ Implemented RESTful APIs for seamless integration\n✅ Conducted code reviews to ensure best practices\n\nI have 6+ months of hands-on development experience!";
     }
 
-    // Contact - Call to Action
+    // Contact
     else if (lowerInput.includes('contact') || lowerInput.includes('email') || lowerInput.includes('reach')) {
-      return "📧 Let's discuss your project:\n\nEmail: valluri.rahul@example.com\nLinkedIn: linkedin.com/in/valluri-rahul\n\nI typically respond within 24 hours. You can also use the contact form below for a direct inquiry!";
+      return "📧 You can reach me at:\n\nEmail: valluri.rahul@example.com\n💼 LinkedIn: linkedin.com/in/valluri-rahul\n🐙 GitHub: github.com/valluri-rahul\n\nOr use the contact form at the bottom of the page!";
     }
 
     // Resume/CV
     else if (lowerInput.includes('resume') || lowerInput.includes('cv')) {
-      return "📄 Professional CV:\n\nYou can download my detailed resume by clicking the 'Download CV' button in the Hero section. It outlines my complete technical proficiencies and project history in detail.";
+      return "📄 You can download my resume by clicking the 'Download CV' button in the hero section at the top of the page! It includes my complete work history, skills, and achievements.";
     }
 
-    // Certifications - Credibility
+    // Certifications
     else if (lowerInput.includes('certificate') || lowerInput.includes('certification')) {
-      return "🏆 Detailed Certifications:\n\n• Advanced Web Development\n• Cloud Computing Fundamentals\n• Professional JavaScript & React Patterns\n\nI am constantly upskilling to ensure I use the latest industry standards in your projects.";
+      return "🏆 I have certifications in:\n\n• Web Development\n• Cloud Computing\n• JavaScript & React\n• Database Management\n\nScroll to the Certifications section to see all my credentials!";
     }
 
     // Achievements
@@ -115,19 +115,19 @@ const LiveChat = () => {
       return "🏆 Key Achievements:\n\n01. Developed responsive web apps with enhanced UX\n02. Collaborated on cross-functional team projects\n03. Implemented RESTful APIs for system integration\n04. Conducted code reviews for quality assurance\n\nCheck the About section for more details!";
     }
 
-    // Availability - Urgent/Biz Focus
-    else if (lowerInput.includes('available') || lowerInput.includes('hire') || lowerInput.includes('job')) {
-      return "✅ Open for Business:\n\nYes, I am currently available for freelance projects and full-time opportunities. I am ready to start immediately and can integrate seamlessly into your existing team or lead a new project from scratch. Let's schedule a call to discuss your needs!";
-    }
-
     // Location
     else if (lowerInput.includes('location') || lowerInput.includes('where')) {
-      return "📍 Location & Timezone:\n\nI am based in Hyderabad, India (IST), but I am experienced in working remotely with clients across different time zones. I ensure overlap hours for effective communication and collaboration.";
+      return "📍 I'm based in Hyderabad, Telangana, India. I'm open to remote opportunities and relocation for the right role!";
+    }
+
+    // Availability
+    else if (lowerInput.includes('available') || lowerInput.includes('hire') || lowerInput.includes('job')) {
+      return "✅ Yes, I'm currently available for new opportunities! I'm looking for full-stack developer roles where I can contribute my skills in React, Node.js, and cloud technologies. Feel free to reach out via the contact form!";
     }
 
     // Default response
     else {
-      return "Hello! 👋\n\nI can assist you with:\n• Technical capabilities & Tech Stack\n• Project Portfolio & Case Studies\n• Service Offerings & Rates\n• Availability & Hiring\n\nPlease select a topic from the menu above or ask me specific questions about your software needs.";
+      return "Thanks for your message! 😊\n\nI can help you with:\n• My background and skills\n• Project details\n• Services I offer\n• Contact information\n• Education and experience\n\nFeel free to ask me anything or explore the portfolio!";
     }
   };
 

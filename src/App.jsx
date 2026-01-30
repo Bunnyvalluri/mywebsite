@@ -156,12 +156,12 @@ function App() {
             </Suspense>
           </ErrorBoundary>
 
-          {/* Services Section */}
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
+          {/* Services Section - Hidden for original view */}
+          {/* <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton variant="grid" />}>
               <Services />
             </Suspense>
-          </ErrorBoundary>
+          </ErrorBoundary> */}
 
           {/* 3D Character Showcase - Disabled for Performance */}
           {/* <ErrorBoundary FallbackComponent={ErrorFallback}>
@@ -170,12 +170,12 @@ function App() {
             </Suspense>
           </ErrorBoundary> */}
 
-          {/* Process Showcase */}
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
+          {/* Process Showcase - Hidden for original view */}
+          {/* <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton height="500px" />}>
               <ProcessShowcase />
             </Suspense>
-          </ErrorBoundary>
+          </ErrorBoundary> */}
 
           {/* Projects Section */}
           <ErrorBoundary FallbackComponent={ErrorFallback}>
@@ -184,19 +184,19 @@ function App() {
             </Suspense>
           </ErrorBoundary>
 
-          {/* Client Logos */}
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
+          {/* Client Logos - Hidden for original view */}
+          {/* <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton height="200px" />}>
               <ClientLogos />
             </Suspense>
-          </ErrorBoundary>
+          </ErrorBoundary> */}
 
-          {/* Certifications */}
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
+          {/* Certifications - Hidden for original view */}
+          {/* <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton variant="grid" />}>
               <Certifications />
             </Suspense>
-          </ErrorBoundary>
+          </ErrorBoundary> */}
 
           {/* Testimonials */}
           <ErrorBoundary FallbackComponent={ErrorFallback}>
