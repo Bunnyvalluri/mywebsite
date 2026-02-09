@@ -1,14 +1,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaLinkedin, FaGithub, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaCheckCircle, FaInstagram, FaTerminal, FaCode, FaTimes, FaPhoneAlt } from 'react-icons/fa';
-import emailjs from '@emailjs/browser';
 
-// EmailJS Configuration
-// TODO: Replace these with your actual EmailJS credentials from https://www.emailjs.com/
-// See EMAILJS_SETUP.md for detailed setup instructions
-const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID_HERE';  // e.g., 'service_abc123'
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID_HERE'; // e.g., 'template_xyz789'
-const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY_HERE';   // e.g., 'abcdefghijk123'
+// Form submission endpoint
+const FORM_ENDPOINT = 'https://submit-form.com/RRB6NqsxA';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -41,31 +36,26 @@ const Contact = () => {
     setErrorMessage('');
 
     try {
-      // Check if EmailJS is configured
-      if (EMAILJS_SERVICE_ID === 'YOUR_SERVICE_ID_HERE' ||
-        EMAILJS_TEMPLATE_ID === 'YOUR_TEMPLATE_ID_HERE' ||
-        EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY_HERE') {
-        throw new Error('EmailJS not configured. Please see EMAILJS_SETUP.md for setup instructions.');
-      }
-
-      // Send email using EmailJS
-      const templateParams = {
-        from_name: formData.name,
-        from_email: formData.email,
+      // Prepare form data for submission
+      const formPayload = {
+        name: formData.name,
+        email: formData.email,
         service: formData.service,
         budget: formData.budget,
         message: formData.message,
-        to_email: 'codewithrahul23@gmail.com' // Your email
+        _subject: `New Contact Form Submission from ${formData.name}`,
       };
 
-      const response = await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        templateParams,
-        EMAILJS_PUBLIC_KEY
-      );
+      // Submit to form endpoint
+      const response = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formPayload),
+      });
 
-      if (response.status === 200) {
+      if (response.ok) {
         // Success!
         setFormData({ name: '', email: '', service: 'Full Stack Dev', budget: '$1k - $5k', message: '' });
         setShowPopup(true);
@@ -74,7 +64,7 @@ const Contact = () => {
         throw new Error('Failed to send message');
       }
     } catch (error) {
-      console.error('Email sending error:', error);
+      console.error('Form submission error:', error);
       setErrorMessage(error.message || 'Failed to send message. Please try again or email me directly at codewithrahul23@gmail.com');
     } finally {
       setIsSubmitting(false);

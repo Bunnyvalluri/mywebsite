@@ -3,6 +3,9 @@ import { motion } from 'framer-motion';
 import { FiMail, FiPhone, FiMapPin, FiSend, FiGithub, FiLinkedin, FiTwitter, FiCheckCircle } from 'react-icons/fi';
 import { SpotlightCard, ShimmerButton } from './AnimatedComponents';
 
+// Form submission endpoint
+const FORM_ENDPOINT = 'https://submit-form.com/RRB6NqsxA';
+
 const EnhancedContact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -54,17 +57,42 @@ const EnhancedContact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    try {
+      // Prepare form data for submission
+      const formPayload = {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        _subject: `${formData.subject} - from ${formData.name}`,
+      };
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+      // Submit to form endpoint
+      const response = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formPayload),
+      });
 
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 3000);
+      if (response.ok) {
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+
+        // Reset form after 3 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+          setFormData({ name: '', email: '', subject: '', message: '' });
+        }, 3000);
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setIsSubmitting(false);
+      alert('Failed to send message. Please try again or contact me directly via email.');
+    }
   };
 
   return (
