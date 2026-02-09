@@ -178,19 +178,32 @@ const Contact = () => {
                   <div>
                     <label className="block text-sm font-semibold text-[--color-text-muted] mb-3">Service Required</label>
                     <div className="flex flex-wrap gap-2">
-                      {services.map(s => (
-                        <button
-                          key={s}
-                          type="button"
-                          onClick={() => setFormData({ ...formData, service: s })}
-                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 border-2 shadow-sm ${formData.service === s
-                            ? 'bg-blue-600 border-blue-600 text-white shadow-lg shadow-blue-500/30 scale-105'
-                            : 'bg-[--color-background-custom] border-[--color-border-custom] text-[--color-text-secondary] hover:border-blue-500/50 hover:shadow-md'
-                            }`}
-                        >
-                          {s}
-                        </button>
-                      ))}
+                      {services.map(s => {
+                        // Color mapping for each service
+                        const serviceColors = {
+                          'Full Stack Dev': { bg: 'bg-blue-600', border: 'border-blue-600', shadow: 'shadow-blue-500/30', hover: 'hover:border-blue-500/50' },
+                          'Cybersecurity': { bg: 'bg-red-600', border: 'border-red-600', shadow: 'shadow-red-500/30', hover: 'hover:border-red-500/50' },
+                          'Cloud Architecture': { bg: 'bg-cyan-600', border: 'border-cyan-600', shadow: 'shadow-cyan-500/30', hover: 'hover:border-cyan-500/50' },
+                          'AI/ML Integration': { bg: 'bg-purple-600', border: 'border-purple-600', shadow: 'shadow-purple-500/30', hover: 'hover:border-purple-500/50' },
+                          'Blockchain': { bg: 'bg-orange-600', border: 'border-orange-600', shadow: 'shadow-orange-500/30', hover: 'hover:border-orange-500/50' },
+                          'DevOps': { bg: 'bg-green-600', border: 'border-green-600', shadow: 'shadow-green-500/30', hover: 'hover:border-green-500/50' }
+                        };
+                        const colors = serviceColors[s] || { bg: 'bg-blue-600', border: 'border-blue-600', shadow: 'shadow-blue-500/30', hover: 'hover:border-blue-500/50' };
+
+                        return (
+                          <button
+                            key={s}
+                            type="button"
+                            onClick={() => setFormData({ ...formData, service: s })}
+                            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 border-2 shadow-sm ${formData.service === s
+                                ? `${colors.bg} ${colors.border} text-white shadow-lg ${colors.shadow} scale-105`
+                                : `bg-[--color-background-custom] ${colors.border} text-[--color-text-secondary] ${colors.hover} hover:shadow-md`
+                              }`}
+                          >
+                            {s}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
 
