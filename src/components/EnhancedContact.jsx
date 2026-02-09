@@ -3,8 +3,9 @@ import { motion } from 'framer-motion';
 import { FiMail, FiPhone, FiMapPin, FiSend, FiGithub, FiLinkedin, FiTwitter, FiCheckCircle } from 'react-icons/fi';
 import { SpotlightCard, ShimmerButton } from './AnimatedComponents';
 
-// Form submission endpoint
-const FORM_ENDPOINT = 'https://submit-form.com/RRB6NqsxA';
+// Form submission endpoint - Formspree
+const FORM_ENDPOINT = 'https://formspree.io/f/xdkobkle';
+
 
 const EnhancedContact = () => {
   const [formData, setFormData] = useState({

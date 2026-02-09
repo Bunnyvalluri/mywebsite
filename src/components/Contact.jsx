@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaLinkedin, FaGithub, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaCheckCircle, FaInstagram, FaTerminal, FaCode, FaTimes, FaPhoneAlt } from 'react-icons/fa';
 
-// Form submission endpoint - Formspark
-// Get your form ID from: https://dashboard.formspark.io/
-// Format: https://submit-form.com/YOUR_FORM_ID
-const FORM_ENDPOINT = 'https://submit-form.com/RRB6NqsxA';
+// Form submission endpoint - Formspree
+// Sends emails directly to: codewithrahul23@gmail.com
+// Dashboard: https://formspree.io/forms
+const FORM_ENDPOINT = 'https://formspree.io/f/xdkobkle';
 
 
 const Contact = () => {
