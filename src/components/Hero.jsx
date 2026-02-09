@@ -117,52 +117,32 @@ const Hero = () => {
               <span className="text-5xl font-black gradient-text">&lt;/&gt;</span>
             </div>
 
-            {/* Orbit Ring 1 - React & Frontend - Slower Animation */}
+            {/* Orbit Ring 1 - React & Frontend - Responsive Size */}
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-              className="absolute w-72 h-72 border-2 border-indigo-500/20 rounded-full flex items-center justify-center"
+              className="absolute w-56 h-56 md:w-72 md:h-72 border-2 border-indigo-500/20 rounded-full flex items-center justify-center"
             >
-              <motion.div
-                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4 glass-strong rounded-2xl shadow-xl border border-blue-500/30"
-                whileHover={{ scale: 1.2 }}
-              >
-                <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
-                  <FaReact className="text-3xl text-[#61DAFB]" />
-                </motion.div>
-              </motion.div>
-              <motion.div
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 p-4 glass-strong rounded-2xl shadow-xl border border-yellow-500/30"
-                whileHover={{ scale: 1.2 }}
-              >
-                <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
-                  <FaJs className="text-3xl text-[#F7DF1E]" />
-                </motion.div>
-              </motion.div>
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 p-2 md:p-4 glass-strong rounded-2xl shadow-xl border border-blue-500/30">
+                <FaReact className="text-2xl md:text-3xl text-[#61DAFB] animate-spin-slow" />
+              </div>
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 p-2 md:p-4 glass-strong rounded-2xl shadow-xl border border-yellow-500/30">
+                <FaJs className="text-2xl md:text-3xl text-[#F7DF1E]" />
+              </div>
             </motion.div>
 
-            {/* Orbit Ring 2 - Backend & Tools - Slower Animation */}
+            {/* Orbit Ring 2 - Backend & Tools - Responsive Size */}
             <motion.div
               animate={{ rotate: -360 }}
               transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-              className="absolute w-[28rem] h-[28rem] border-2 border-purple-500/20 rounded-full flex items-center justify-center"
+              className="absolute w-72 h-72 md:w-[28rem] md:h-[28rem] border-2 border-purple-500/20 rounded-full flex items-center justify-center"
             >
-              <motion.div
-                className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 p-4 glass-strong rounded-2xl shadow-xl border border-green-500/30"
-                whileHover={{ scale: 1.2 }}
-              >
-                <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
-                  <FaNodeJs className="text-3xl text-[#339933]" />
-                </motion.div>
-              </motion.div>
-              <motion.div
-                className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 p-4 glass-strong rounded-2xl shadow-xl border border-purple-500/30"
-                whileHover={{ scale: 1.2 }}
-              >
-                <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.5 }}>
-                  <FaBootstrap className="text-3xl text-[#7952B3]" />
-                </motion.div>
-              </motion.div>
+              <div className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 p-2 md:p-4 glass-strong rounded-2xl shadow-xl border border-green-500/30">
+                <FaNodeJs className="text-2xl md:text-3xl text-[#339933]" />
+              </div>
+              <div className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 p-2 md:p-4 glass-strong rounded-2xl shadow-xl border border-purple-500/30">
+                <FaBootstrap className="text-2xl md:text-3xl text-[#7952B3]" />
+              </div>
             </motion.div>
 
             {/* Removed Floating Particles for Performance */}

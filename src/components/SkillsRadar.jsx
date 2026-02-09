@@ -121,17 +121,17 @@ const SkillsRadar = () => {
         {skills.map((skill, i) => {
           // Calculate label position slightly outside radius
           const angle = i * angleStep - Math.PI / 2;
-          const labelR = radius + 40;
+          const labelR = radius + 35; // Slightly reduced to ensure fit
           const x = cx + labelR * Math.cos(angle);
           const y = cy + labelR * Math.sin(angle);
 
           return (
             <motion.div
               key={i}
-              className="absolute text-sm font-semibold text-[--color-text-main]"
+              className="absolute text-xs md:text-sm font-semibold text-[--color-text-main]"
               style={{
-                left: (size === 300 ? x + 50 : x), // Offset for container padding
-                top: (size === 300 ? y + 50 : y),
+                left: `${(x / size) * 100}%`,
+                top: `${(y / size) * 100}%`,
                 transform: 'translate(-50%, -50%)'
               }}
               initial={{ opacity: 0 }}

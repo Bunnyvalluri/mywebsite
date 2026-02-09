@@ -67,44 +67,14 @@ function App() {
     }
   }, [darkMode]);
 
-  // Disable Inspect Element and Right Click
-  useEffect(() => {
-    const handleContextMenu = (e) => {
-      e.preventDefault();
-    };
 
-    const handleKeyDown = (e) => {
-      // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
-      if (
-        e.key === 'F12' ||
-        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) ||
-        (e.ctrlKey && e.key === 'u')
-      ) {
-        e.preventDefault();
-      }
-    };
-
-    const handleDoubleClick = (e) => {
-      e.preventDefault();
-    };
-
-    document.addEventListener('contextmenu', handleContextMenu);
-    document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('dblclick', handleDoubleClick);
-
-    return () => {
-      document.removeEventListener('contextmenu', handleContextMenu);
-      document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('dblclick', handleDoubleClick);
-    };
-  }, []);
 
   const toggleTheme = () => {
     setDarkMode(!darkMode);
   };
 
   return (
-    <div className="bg-[--color-background-custom] text-[--color-text-main] min-h-screen font-sans selection:bg-[--color-accent] selection:text-white transition-colors duration-300 relative overflow-x-hidden select-none">
+    <div className="bg-[--color-background-custom] text-[--color-text-main] min-h-screen font-sans selection:bg-[--color-accent] selection:text-white transition-colors duration-300 relative overflow-x-hidden">
 
 
 

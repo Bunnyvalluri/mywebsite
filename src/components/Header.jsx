@@ -141,20 +141,21 @@ const Header = ({ darkMode, toggleTheme }) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[--color-background-custom]/95 backdrop-blur-xl border-b border-[--color-border-custom] overflow-hidden shadow-2xl"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden absolute top-full left-0 right-0 bg-[--color-background-custom]/98 backdrop-blur-xl border-b border-[--color-border-custom] shadow-2xl z-[9998]"
           >
-            <div className="px-4 py-8 space-y-6">
+            <div className="px-4 py-6 space-y-4 max-h-[calc(100vh-80px)] overflow-y-auto">
               {links.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`block text-lg font-medium transition-colors cursor-pointer ${activeSection === link.href.substring(1)
-                    ? 'text-indigo-500 pl-2 border-l-2 border-indigo-500'
-                    : 'text-[--color-text-muted] hover:text-[--color-text-main]'
+                  className={`block text-lg font-medium transition-colors py-3 px-4 rounded-lg ${activeSection === link.href.substring(1)
+                    ? 'text-white bg-gradient-to-r from-indigo-600 to-purple-600'
+                    : 'text-[--color-text-main] hover:bg-[--color-surface]'
                     }`}
                 >
                   {link.name}
