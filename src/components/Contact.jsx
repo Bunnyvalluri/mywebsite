@@ -30,41 +30,9 @@ const Contact = () => {
   const budgets = ["< $1k", "$1k - $5k", "$5k - $10k", "$10k+"];
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // Let the form submit naturally to submit-form.com
+    // The form will redirect after successful submission
     setIsSubmitting(true);
-
-    try {
-      // Prepare form data using FormData (required by submit-form.com)
-      const formPayload = new FormData();
-      formPayload.append('name', formData.name);
-      formPayload.append('email', formData.email);
-      formPayload.append('service', formData.service);
-      formPayload.append('budget', formData.budget);
-      formPayload.append('message', formData.message);
-      formPayload.append('_subject', `New Contact Form Submission from ${formData.name}`);
-
-      // Submit to form endpoint
-      const response = await fetch(FORM_ENDPOINT, {
-        method: 'POST',
-        body: formPayload,
-      });
-
-      if (response.ok) {
-        // Success!
-        setFormData({ name: '', email: '', service: 'Full Stack Dev', budget: '$1k - $5k', message: '' });
-        setShowPopup(true);
-        setTimeout(() => setShowPopup(false), 5000);
-      } else {
-        const errorText = await response.text();
-        console.error('Form submission failed:', errorText);
-        alert('Failed to send message. Please try again or email me directly at codewithrahul23@gmail.com');
-      }
-    } catch (error) {
-      console.error('Form submission error:', error);
-      alert('Failed to send message. Please try again or email me directly at codewithrahul23@gmail.com');
-    } finally {
-      setIsSubmitting(false);
-    }
   };
 
   const handleChange = (e) => {
@@ -158,7 +126,14 @@ const Contact = () => {
                   <FaCode className="text-[--color-text-muted] text-xl opacity-50 group-hover:rotate-[360deg] transition-transform duration-500" />
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+
+                <form action={FORM_ENDPOINT} method="POST" onSubmit={handleSubmit} className="space-y-6">
+                  {/* Hidden fields for submit-form.com configuration */}
+                  <input type="hidden" name="_redirect" value="https://valluri-rahul-portfolio.vercel.app/?success=true" />
+                  <input type="hidden" name="_subject" value={`New Contact Form Submission from ${formData.name}`} />
+                  <input type="hidden" name="service" value={formData.service} />
+                  <input type="hidden" name="budget" value={formData.budget} />
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <InputField
                       label="Your Name"

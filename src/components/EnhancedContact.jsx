@@ -54,42 +54,8 @@ const EnhancedContact = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // Let the form submit naturally to submit-form.com
     setIsSubmitting(true);
-
-    try {
-      // Prepare form data using FormData (required by submit-form.com)
-      const formPayload = new FormData();
-      formPayload.append('name', formData.name);
-      formPayload.append('email', formData.email);
-      formPayload.append('subject', formData.subject);
-      formPayload.append('message', formData.message);
-      formPayload.append('_subject', `${formData.subject} - from ${formData.name}`);
-
-      // Submit to form endpoint
-      const response = await fetch(FORM_ENDPOINT, {
-        method: 'POST',
-        body: formPayload,
-      });
-
-      if (response.ok) {
-        setIsSubmitting(false);
-        setIsSubmitted(true);
-
-        // Reset form after 3 seconds
-        setTimeout(() => {
-          setIsSubmitted(false);
-          setFormData({ name: '', email: '', subject: '', message: '' });
-        }, 3000);
-      } else {
-        const errorText = await response.text();
-        throw new Error(errorText || 'Failed to send message');
-      }
-    } catch (error) {
-      console.error('Form submission error:', error);
-      setIsSubmitting(false);
-      alert('Failed to send message. Please try again or contact me directly via email.');
-    }
   };
 
   return (
@@ -138,7 +104,10 @@ const EnhancedContact = () => {
             viewport={{ once: true }}
           >
             <SpotlightCard className="h-full">
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form action={FORM_ENDPOINT} method="POST" onSubmit={handleSubmit} className="space-y-6">
+                {/* Hidden field for redirect after submission */}
+                <input type="hidden" name="_redirect" value="https://valluri-rahul-portfolio.vercel.app/?success=true" />
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-semibold text-[--color-primary] mb-2">
