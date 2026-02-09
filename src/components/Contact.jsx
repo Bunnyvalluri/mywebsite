@@ -1,17 +1,26 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaLinkedin, FaGithub, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaCheckCircle, FaInstagram, FaTerminal, FaCode, FaTimes, FaPhoneAlt } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
+
+// EmailJS Configuration
+// TODO: Replace these with your actual EmailJS credentials from https://www.emailjs.com/
+// See EMAILJS_SETUP.md for detailed setup instructions
+const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID_HERE';  // e.g., 'service_abc123'
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID_HERE'; // e.g., 'template_xyz789'
+const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY_HERE';   // e.g., 'abcdefghijk123'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    service: 'Web Development',
+    service: 'Full Stack Dev',
     budget: '$1k - $5k',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   // Professional service options
   const services = [
@@ -29,36 +38,44 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setErrorMessage('');
 
     try {
-      const response = await fetch('https://submit-form.com/RRB6NqsxA?_redirect=false', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          service: formData.service,
-          budget: formData.budget,
-          message: formData.message,
-          "_email.subject": `Dev Portfolio Inquiry: ${formData.service} from ${formData.name}`,
-        })
-      });
+      // Check if EmailJS is configured
+      if (EMAILJS_SERVICE_ID === 'YOUR_SERVICE_ID_HERE' ||
+        EMAILJS_TEMPLATE_ID === 'YOUR_TEMPLATE_ID_HERE' ||
+        EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY_HERE') {
+        throw new Error('EmailJS not configured. Please see EMAILJS_SETUP.md for setup instructions.');
+      }
 
-      if (response.ok) {
-        setFormData({ name: '', email: '', service: 'Web Development', budget: '$1k - $5k', message: '' });
+      // Send email using EmailJS
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        service: formData.service,
+        budget: formData.budget,
+        message: formData.message,
+        to_email: 'codewithrahul23@gmail.com' // Your email
+      };
+
+      const response = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      if (response.status === 200) {
+        // Success!
+        setFormData({ name: '', email: '', service: 'Full Stack Dev', budget: '$1k - $5k', message: '' });
         setShowPopup(true);
         setTimeout(() => setShowPopup(false), 5000);
       } else {
-        const data = await response.json().catch(() => ({}));
-        console.error('Submission error:', data);
-        alert('There was an issue sending your message. Please try again.');
+        throw new Error('Failed to send message');
       }
     } catch (error) {
-      alert('Network error. Please try again later.');
-      console.error('Submission error:', error);
+      console.error('Email sending error:', error);
+      setErrorMessage(error.message || 'Failed to send message. Please try again or email me directly at codewithrahul23@gmail.com');
     } finally {
       setIsSubmitting(false);
     }
@@ -241,6 +258,17 @@ const Contact = () => {
                       placeholder="Tell me about your project goals and timeline..."
                     ></textarea>
                   </div>
+
+                  {/* Error Message Display */}
+                  {errorMessage && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-500 text-sm"
+                    >
+                      <p className="font-semibold">⚠️ {errorMessage}</p>
+                    </motion.div>
+                  )}
 
                   <button
                     type="submit"
