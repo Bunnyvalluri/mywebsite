@@ -220,7 +220,9 @@ const About = () => {
                   <div key={index} className="flex flex-col items-center gap-3 group px-4">
                     <div className="w-20 h-20 rounded-2xl bg-[--color-surface] border border-[--color-border-custom] flex items-center justify-center text-4xl shadow-md group-hover:scale-110 transition-transform duration-300 group-hover:border-[--color-accent]"
                       style={{ color: skill.color }}>
-                      <Icon />
+                      <span className="inline-block group-hover:rotate-[360deg] transition-transform duration-500">
+                        <Icon />
+                      </span>
                     </div>
                     <span className="text-sm font-semibold text-[--color-secondary] group-hover:text-[--color-primary] transition-colors">{skill.name}</span>
                   </div>
