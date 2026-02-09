@@ -156,26 +156,26 @@ function App() {
             </Suspense>
           </ErrorBoundary>
 
-          {/* Services Section - What I Do (Code + Design) */}
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
+          {/* Services Section - Hidden for original view */}
+          {/* <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton variant="grid" />}>
               <Services />
             </Suspense>
-          </ErrorBoundary>
+          </ErrorBoundary> */}
 
-          {/* 3D Character Showcase - Disabled for Performance */}
-          {/* <ErrorBoundary FallbackComponent={ErrorFallback}>
+          {/* 3D Character Showcase */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton height="500px" />}>
               <ThreeDCharacterShowcase />
             </Suspense>
-          </ErrorBoundary> */}
+          </ErrorBoundary>
 
-          {/* Process Showcase - Workflow (Design -> Code) */}
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
+          {/* Process Showcase - Hidden for original view */}
+          {/* <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton height="500px" />}>
               <ProcessShowcase />
             </Suspense>
-          </ErrorBoundary>
+          </ErrorBoundary> */}
 
           {/* Projects Section */}
           <ErrorBoundary FallbackComponent={ErrorFallback}>
@@ -184,19 +184,19 @@ function App() {
             </Suspense>
           </ErrorBoundary>
 
-          {/* Client Logos - Hidden for original view */}
-          {/* <ErrorBoundary FallbackComponent={ErrorFallback}>
+          {/* Client Logos */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton height="200px" />}>
               <ClientLogos />
             </Suspense>
-          </ErrorBoundary> */}
+          </ErrorBoundary>
 
-          {/* Certifications - Hidden for original view */}
-          {/* <ErrorBoundary FallbackComponent={ErrorFallback}>
+          {/* Certifications */}
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Suspense fallback={<ComponentSkeleton variant="grid" />}>
               <Certifications />
             </Suspense>
-          </ErrorBoundary> */}
+          </ErrorBoundary>
 
           {/* Testimonials */}
           <ErrorBoundary FallbackComponent={ErrorFallback}>
