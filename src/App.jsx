@@ -12,7 +12,9 @@ import {
 
 // Lazy load components for better performance
 // Standard components - Using original versions
-const Hero = lazy(() => import('./components/Hero'));
+// Hero is critical - load eagerly
+import Hero from './components/Hero';
+// ... other lazy imports
 const Stats = lazy(() => import('./components/Stats'));
 const About = lazy(() => import('./components/About'));
 const Services = lazy(() => import('./components/Services'));
@@ -134,9 +136,7 @@ function App() {
         <main>
           {/* Hero Section - Critical, load immediately */}
           <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <Suspense fallback={<ComponentSkeleton variant="hero" />}>
-              <Hero />
-            </Suspense>
+            <Hero />
           </ErrorBoundary>
 
           {/* Stats Section */}
