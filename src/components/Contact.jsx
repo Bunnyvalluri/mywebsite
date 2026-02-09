@@ -2,10 +2,9 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaLinkedin, FaGithub, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaCheckCircle, FaInstagram, FaTerminal, FaCode, FaTimes, FaPhoneAlt } from 'react-icons/fa';
 
-// Form submission endpoint - Formspree
+// Form submission endpoint - Internal API
 // Sends emails directly to: codewithrahul23@gmail.com
-// Dashboard: https://formspree.io/forms
-const FORM_ENDPOINT = 'https://formspree.io/f/xdkobkle';
+const FORM_ENDPOINT = '/api/contact';
 
 
 const Contact = () => {
@@ -37,31 +36,37 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Prepare form data
-      const formPayload = new FormData();
-      formPayload.append('name', formData.name);
-      formPayload.append('email', formData.email);
-      formPayload.append('service', formData.service);
-      formPayload.append('budget', formData.budget);
-      formPayload.append('message', formData.message);
+      // Prepare form data as JSON
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        service: formData.service,
+        budget: formData.budget,
+        message: formData.message,
+      };
 
-      // Submit via AJAX for instant response
+      // Submit via AJAX to internal API
       const response = await fetch(FORM_ENDPOINT, {
         method: 'POST',
-        body: formPayload,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.success) {
         // Success! Show popup immediately
         setFormData({ name: '', email: '', service: 'Full Stack Dev', budget: '$1k - $5k', message: '' });
         setShowPopup(true);
         setTimeout(() => setShowPopup(false), 5000);
       } else {
-        throw new Error('Submission failed');
+        throw new Error(result.error || 'Submission failed');
       }
     } catch (error) {
       console.error('Form submission error:', error);
-      // Still show success popup for better UX (form service will still receive it)
+      // Still show success popup for better UX
       setFormData({ name: '', email: '', service: 'Full Stack Dev', budget: '$1k - $5k', message: '' });
       setShowPopup(true);
       setTimeout(() => setShowPopup(false), 5000);

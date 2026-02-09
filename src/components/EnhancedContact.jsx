@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import { FiMail, FiPhone, FiMapPin, FiSend, FiGithub, FiLinkedin, FiTwitter, FiCheckCircle } from 'react-icons/fi';
 import { SpotlightCard, ShimmerButton } from './AnimatedComponents';
 
-// Form submission endpoint - Formspree
-const FORM_ENDPOINT = 'https://formspree.io/f/xdkobkle';
+// Form submission endpoint - Internal API
+const FORM_ENDPOINT = '/api/contact';
 
 
 const EnhancedContact = () => {
@@ -59,20 +59,26 @@ const EnhancedContact = () => {
     setIsSubmitting(true);
 
     try {
-      // Prepare form data
-      const formPayload = new FormData();
-      formPayload.append('name', formData.name);
-      formPayload.append('email', formData.email);
-      formPayload.append('subject', formData.subject);
-      formPayload.append('message', formData.message);
+      // Prepare form data as JSON
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      };
 
-      // Submit via AJAX for instant response
+      // Submit via AJAX to internal API
       const response = await fetch(FORM_ENDPOINT, {
         method: 'POST',
-        body: formPayload,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.success) {
         setIsSubmitting(false);
         setIsSubmitted(true);
 
@@ -82,7 +88,7 @@ const EnhancedContact = () => {
           setFormData({ name: '', email: '', subject: '', message: '' });
         }, 3000);
       } else {
-        throw new Error('Submission failed');
+        throw new Error(result.error || 'Submission failed');
       }
     } catch (error) {
       console.error('Form submission error:', error);
