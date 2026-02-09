@@ -62,7 +62,7 @@ ${message}
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        access_key: '8f3c4e5d-6a7b-4c8d-9e0f-1a2b3c4d5e6f', // You'll need to replace this with your Web3Forms key
+        access_key: 'form_v1_k3yenXQTNRoEEh6w6j4IXOXk', // User provided key
         name: name,
         email: email,
         subject: subject || `New Contact Form Submission from ${name}`,
