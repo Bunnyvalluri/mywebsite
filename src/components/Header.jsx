@@ -52,7 +52,7 @@ const Header = ({ darkMode, toggleTheme }) => {
 
   return (
     <header className={`fixed top-0 w-full z-[9999] transition-all duration-300 ${scrolled
-      ? 'bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/10 shadow-lg'
+      ? 'bg-[--color-background-custom]/90 backdrop-blur-md border-b border-[--color-border-custom] shadow-lg'
       : 'bg-transparent'
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,7 +65,7 @@ const Header = ({ darkMode, toggleTheme }) => {
             className="flex-shrink-0"
           >
             <a href="#home" onClick={handleNavClick} className="flex items-center gap-2 group cursor-pointer">
-              <span className="text-2xl font-bold tracking-tighter text-white">
+              <span className="text-2xl font-bold tracking-tighter text-[--color-text-main]">
                 VALLURI <span className="text-indigo-500 group-hover:text-purple-500 transition-colors">RAHUL</span>
               </span>
             </a>
@@ -82,8 +82,8 @@ const Header = ({ darkMode, toggleTheme }) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className={`text-sm font-medium transition-colors duration-300 relative group cursor-pointer ${activeSection === link.href.substring(1)
-                  ? 'text-white'
-                  : 'text-gray-400 hover:text-white'
+                  ? 'text-[--color-text-main]'
+                  : 'text-[--color-text-muted] hover:text-[--color-text-main]'
                   }`}
               >
                 {link.name}
@@ -94,7 +94,7 @@ const Header = ({ darkMode, toggleTheme }) => {
 
             <button
               onClick={toggleTheme}
-              className="ml-4 p-2 rounded-full border border-white/10 text-gray-400 hover:text-white hover:bg-white/5 transition-all text-xl"
+              className="ml-4 p-2 rounded-full border border-[--color-border-custom] text-[--color-text-muted] hover:text-[--color-text-main] hover:bg-[--color-surface] transition-all text-xl"
             >
               {darkMode ? <FiSun /> : <FiMoon />}
             </button>
@@ -104,13 +104,13 @@ const Header = ({ darkMode, toggleTheme }) => {
           <div className="md:hidden flex items-center gap-4">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full border border-white/10 text-gray-400 text-xl"
+              className="p-2 rounded-full border border-[--color-border-custom] text-[--color-text-muted] text-xl"
             >
               {darkMode ? <FiSun /> : <FiMoon />}
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-white p-2 text-2xl"
+              className="text-[--color-text-main] p-2 text-2xl"
             >
               {isOpen ? <FiX /> : <FiMenu />}
             </button>
@@ -134,8 +134,8 @@ const Header = ({ darkMode, toggleTheme }) => {
                   href={link.href}
                   onClick={handleNavClick}
                   className={`block text-lg font-medium transition-colors cursor-pointer ${activeSection === link.href.substring(1)
-                    ? 'text-indigo-400 pl-2 border-l-2 border-indigo-500'
-                    : 'text-gray-400 hover:text-white'
+                    ? 'text-indigo-500 pl-2 border-l-2 border-indigo-500'
+                    : 'text-[--color-text-muted] hover:text-[--color-text-main]'
                     }`}
                 >
                   {link.name}
