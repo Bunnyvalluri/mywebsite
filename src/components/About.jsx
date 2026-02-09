@@ -120,8 +120,8 @@ const About = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-bold text-[--color-primary] mb-6 flex items-center gap-2">
-                <FaTrophy className="text-[--color-accent]" /> Key Achievements
+              <h3 className="text-2xl font-bold text-[--color-primary] mb-6 flex items-center gap-2 group">
+                <FaTrophy className="text-[--color-accent] group-hover:rotate-[360deg] transition-transform duration-500" /> Key Achievements
               </h3>
               <div className="space-y-6">
                 {achievements.map((item) => (
@@ -160,8 +160,8 @@ const About = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-bold text-[--color-primary] mb-6 flex items-center gap-2">
-                <FaGraduationCap className="text-[--color-accent]" /> Education
+              <h3 className="text-2xl font-bold text-[--color-primary] mb-6 flex items-center gap-2 group">
+                <FaGraduationCap className="text-[--color-accent] group-hover:rotate-[360deg] transition-transform duration-500" /> Education
               </h3>
               <div className="space-y-8 relative border-l-2 border-[--color-border-custom] ml-3 pl-8">
                 {education.map((edu, index) => (

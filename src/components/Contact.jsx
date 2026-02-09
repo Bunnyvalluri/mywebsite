@@ -131,9 +131,9 @@ const Contact = () => {
             <div>
               <p className="text-sm font-bold text-[--color-text-muted] uppercase tracking-widest mb-4">Connect on Socials</p>
               <div className="flex gap-4">
-                <SocialBtn href="https://github.com/bunnyvalluri" icon={<FaGithub />} label="GitHub" />
-                <SocialBtn href="https://www.linkedin.com/in/syntaxrahul/" icon={<FaLinkedin />} label="LinkedIn" />
-                <SocialBtn href="https://www.instagram.com/syntax_bunny?igsh=MXc1enVmcnlpdW5lYg==" icon={<FaInstagram />} label="Instagram" />
+                <SocialBtn href="https://github.com/bunnyvalluri" icon={<FaGithub />} label="GitHub" bgColor="bg-[#333]" />
+                <SocialBtn href="https://www.linkedin.com/in/syntaxrahul/" icon={<FaLinkedin />} label="LinkedIn" bgColor="bg-[#0077B5]" />
+                <SocialBtn href="https://www.instagram.com/syntax_bunny?igsh=MXc1enVmcnlpdW5lYg==" icon={<FaInstagram />} label="Instagram" bgColor="bg-gradient-to-br from-[#833AB4] via-[#E1306C] to-[#F77737]" />
               </div>
             </div>
           </motion.div>
@@ -147,12 +147,12 @@ const Contact = () => {
           >
             <div className="relative group">
               {/* Glow Effect */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-violet-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-violet-600 rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition duration-500"></div>
 
-              <div className="relative p-8 md:p-10 rounded-2xl bg-[--color-surface] border border-[--color-border-custom] shadow-2xl">
+              <div className="relative p-8 md:p-10 rounded-2xl bg-[--color-surface] border-2 border-[--color-border-custom] shadow-xl backdrop-blur-sm">
                 <div className="flex items-center justify-between mb-8">
                   <h3 className="text-2xl font-bold text-[--color-primary]">Start a Project</h3>
-                  <FaCode className="text-[--color-text-muted] text-xl opacity-50" />
+                  <FaCode className="text-[--color-text-muted] text-xl opacity-50 group-hover:rotate-[360deg] transition-transform duration-500" />
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -183,9 +183,9 @@ const Contact = () => {
                           key={s}
                           type="button"
                           onClick={() => setFormData({ ...formData, service: s })}
-                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 border ${formData.service === s
-                            ? 'bg-blue-600 border-blue-600 text-white shadow-lg shadow-blue-500/25'
-                            : 'bg-[--color-background-custom] border-[--color-border-custom] text-[--color-text-secondary] hover:border-blue-500/50'
+                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 border-2 shadow-sm ${formData.service === s
+                            ? 'bg-blue-600 border-blue-600 text-white shadow-lg shadow-blue-500/30 scale-105'
+                            : 'bg-[--color-background-custom] border-[--color-border-custom] text-[--color-text-secondary] hover:border-blue-500/50 hover:shadow-md'
                             }`}
                         >
                           {s}
@@ -203,9 +203,9 @@ const Contact = () => {
                           key={b}
                           type="button"
                           onClick={() => setFormData({ ...formData, budget: b })}
-                          className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 border text-center ${formData.budget === b
-                            ? 'bg-violet-600 border-violet-600 text-white shadow-lg shadow-violet-500/25'
-                            : 'bg-[--color-background-custom] border-[--color-border-custom] text-[--color-text-secondary] hover:border-violet-500/50'
+                          className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 border-2 text-center shadow-sm ${formData.budget === b
+                            ? 'bg-violet-600 border-violet-600 text-white shadow-lg shadow-violet-500/30 scale-105'
+                            : 'bg-[--color-background-custom] border-[--color-border-custom] text-[--color-text-secondary] hover:border-violet-500/50 hover:shadow-md'
                             }`}
                         >
                           {b}
@@ -222,7 +222,7 @@ const Contact = () => {
                       onChange={handleChange}
                       required
                       rows={4}
-                      className="w-full px-4 py-3 rounded-xl bg-[--color-background-custom] border border-[--color-border-custom] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-[--color-text-main] placeholder:text-[--color-text-muted]/50 outline-none transition-all resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-[--color-background-custom] border-2 border-[--color-border-custom] focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 text-[--color-text-main] placeholder:text-[--color-text-muted]/50 outline-none transition-all resize-none shadow-sm hover:border-blue-400/50"
                       placeholder="Tell me about your project goals and timeline..."
                     ></textarea>
                   </div>
@@ -292,37 +292,58 @@ const InputField = ({ label, name, type = "text", value, onChange, placeholder }
       value={value}
       onChange={onChange}
       required
-      className="w-full px-4 py-3 rounded-xl bg-[--color-background-custom] border border-[--color-border-custom] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-[--color-text-main] placeholder:text-[--color-text-muted]/50 outline-none transition-all"
+      className="w-full px-4 py-3 rounded-xl bg-[--color-background-custom] border-2 border-[--color-border-custom] focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 text-[--color-text-main] placeholder:text-[--color-text-muted]/50 outline-none transition-all shadow-sm hover:border-blue-400/50"
       placeholder={placeholder}
     />
   </div>
 );
 
-const ContactCard = ({ icon, label, value, href, accentColor }) => (
-  <a
-    href={href}
-    className="flex items-center gap-4 p-4 rounded-xl bg-[--color-surface] border border-[--color-border-custom] hover:border-blue-500/30 hover:shadow-lg transition-all duration-300 group"
-  >
-    <div className={`w-12 h-12 rounded-lg ${accentColor} bg-opacity-10 flex items-center justify-center text-xl text-${accentColor.split('-')[1]}-500 group-hover:scale-110 transition-transform`}>
-      {icon}
-    </div>
-    <div>
-      <p className="text-xs font-bold text-[--color-text-muted] uppercase tracking-wider">{label}</p>
-      <p className="text-[--color-text-main] font-medium group-hover:text-blue-500 transition-colors">{value}</p>
-    </div>
-  </a>
-);
+const ContactCard = ({ icon, label, value, href, accentColor }) => {
+  // Map accent colors to actual color values with background
+  const colorMap = {
+    'bg-blue-500': { icon: '#3b82f6', bg: 'rgba(59, 130, 246, 0.1)' },
+    'bg-violet-500': { icon: '#8b5cf6', bg: 'rgba(139, 92, 246, 0.1)' },
+    'bg-green-500': { icon: '#22c55e', bg: 'rgba(34, 197, 94, 0.1)' }
+  };
 
-const SocialBtn = ({ href, icon, label }) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="w-12 h-12 rounded-full bg-[--color-surface] border border-[--color-border-custom] flex items-center justify-center text-[--color-text-muted] hover:text-white hover:bg-gradient-to-br hover:from-blue-600 hover:to-violet-600 hover:border-transparent transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-1"
-    aria-label={label}
-  >
-    {icon}
-  </a>
-);
+  const colors = colorMap[accentColor] || { icon: '#3b82f6', bg: 'rgba(59, 130, 246, 0.1)' };
+
+  return (
+    <a
+      href={href}
+      className="flex items-center gap-4 p-4 rounded-xl bg-[--color-surface] border border-[--color-border-custom] hover:border-blue-500/30 hover:shadow-lg transition-all duration-300 group"
+    >
+      <div
+        className="w-12 h-12 rounded-lg flex items-center justify-center text-2xl group-hover:scale-110 group-hover:rotate-[360deg] transition-all duration-500"
+        style={{
+          color: colors.icon,
+          backgroundColor: colors.bg
+        }}
+      >
+        {icon}
+      </div>
+      <div>
+        <p className="text-xs font-bold text-[--color-text-muted] uppercase tracking-wider">{label}</p>
+        <p className="text-[--color-text-main] font-medium group-hover:text-blue-500 transition-colors">{value}</p>
+      </div>
+    </a>
+  );
+};
+
+const SocialBtn = ({ href, icon, label, bgColor }) => {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`w-12 h-12 rounded-full ${bgColor} flex items-center justify-center text-white hover:scale-110 hover:shadow-2xl transition-all duration-300 shadow-lg group`}
+      aria-label={label}
+    >
+      <span className="group-hover:rotate-[360deg] transition-transform duration-500 inline-block text-xl">
+        {icon}
+      </span>
+    </a>
+  );
+};
 
 export default Contact;

@@ -124,16 +124,16 @@ const Hero = () => {
               className="absolute w-72 h-72 border-2 border-indigo-500/20 rounded-full flex items-center justify-center"
             >
               <motion.div
-                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4 glass-strong rounded-2xl shadow-xl border border-blue-500/30"
+                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4 glass-strong rounded-2xl shadow-xl border border-blue-500/30 group"
                 whileHover={{ scale: 1.2 }}
               >
-                <FaReact className="text-3xl text-[#61DAFB]" />
+                <FaReact className="text-3xl text-[#61DAFB] group-hover:rotate-[360deg] transition-transform duration-500" />
               </motion.div>
               <motion.div
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 p-4 glass-strong rounded-2xl shadow-xl border border-yellow-500/30"
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 p-4 glass-strong rounded-2xl shadow-xl border border-yellow-500/30 group"
                 whileHover={{ scale: 1.2 }}
               >
-                <FaJs className="text-3xl text-[#F7DF1E]" />
+                <FaJs className="text-3xl text-[#F7DF1E] group-hover:rotate-[360deg] transition-transform duration-500" />
               </motion.div>
             </motion.div>
 
@@ -144,16 +144,16 @@ const Hero = () => {
               className="absolute w-[28rem] h-[28rem] border-2 border-purple-500/20 rounded-full flex items-center justify-center"
             >
               <motion.div
-                className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 p-4 glass-strong rounded-2xl shadow-xl border border-green-500/30"
+                className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 p-4 glass-strong rounded-2xl shadow-xl border border-green-500/30 group"
                 whileHover={{ scale: 1.2 }}
               >
-                <FaNodeJs className="text-3xl text-[#339933]" />
+                <FaNodeJs className="text-3xl text-[#339933] group-hover:rotate-[360deg] transition-transform duration-500" />
               </motion.div>
               <motion.div
-                className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 p-4 glass-strong rounded-2xl shadow-xl border border-purple-500/30"
+                className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 p-4 glass-strong rounded-2xl shadow-xl border border-purple-500/30 group"
                 whileHover={{ scale: 1.2 }}
               >
-                <FaBootstrap className="text-3xl text-[#7952B3]" />
+                <FaBootstrap className="text-3xl text-[#7952B3] group-hover:rotate-[360deg] transition-transform duration-500" />
               </motion.div>
             </motion.div>
 
