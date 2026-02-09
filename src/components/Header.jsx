@@ -46,8 +46,23 @@ const Header = ({ darkMode, toggleTheme }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = () => {
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
     setIsOpen(false);
+
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+
+    if (element) {
+      const offset = 80; // Header height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
   };
 
   return (
@@ -64,7 +79,11 @@ const Header = ({ darkMode, toggleTheme }) => {
             animate={{ opacity: 1, x: 0 }}
             className="flex-shrink-0"
           >
-            <a href="#home" onClick={handleNavClick} className="flex items-center gap-2 group cursor-pointer">
+            <a
+              href="#home"
+              onClick={(e) => handleNavClick(e, '#home')}
+              className="flex items-center gap-2 group cursor-pointer"
+            >
               <span className="text-2xl font-bold tracking-tighter text-[--color-text-main]">
                 VALLURI <span className="text-indigo-500 group-hover:text-purple-500 transition-colors">RAHUL</span>
               </span>
@@ -77,7 +96,7 @@ const Header = ({ darkMode, toggleTheme }) => {
               <motion.a
                 key={link.name}
                 href={link.href}
-                onClick={handleNavClick}
+                onClick={(e) => handleNavClick(e, link.href)}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
@@ -132,7 +151,7 @@ const Header = ({ darkMode, toggleTheme }) => {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={handleNavClick}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className={`block text-lg font-medium transition-colors cursor-pointer ${activeSection === link.href.substring(1)
                     ? 'text-indigo-500 pl-2 border-l-2 border-indigo-500'
                     : 'text-[--color-text-muted] hover:text-[--color-text-main]'
