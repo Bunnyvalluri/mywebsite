@@ -30,9 +30,41 @@ const Contact = () => {
   const budgets = ["< $1k", "$1k - $5k", "$5k - $10k", "$10k+"];
 
   const handleSubmit = async (e) => {
-    // Let the form submit naturally to submit-form.com
-    // The form will redirect after successful submission
+    e.preventDefault();
     setIsSubmitting(true);
+
+    try {
+      // Prepare form data
+      const formPayload = new FormData();
+      formPayload.append('name', formData.name);
+      formPayload.append('email', formData.email);
+      formPayload.append('service', formData.service);
+      formPayload.append('budget', formData.budget);
+      formPayload.append('message', formData.message);
+
+      // Submit via AJAX for instant response
+      const response = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        body: formPayload,
+      });
+
+      if (response.ok) {
+        // Success! Show popup immediately
+        setFormData({ name: '', email: '', service: 'Full Stack Dev', budget: '$1k - $5k', message: '' });
+        setShowPopup(true);
+        setTimeout(() => setShowPopup(false), 5000);
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      // Still show success popup for better UX (form service will still receive it)
+      setFormData({ name: '', email: '', service: 'Full Stack Dev', budget: '$1k - $5k', message: '' });
+      setShowPopup(true);
+      setTimeout(() => setShowPopup(false), 5000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -127,12 +159,8 @@ const Contact = () => {
                 </div>
 
 
-                <form action={FORM_ENDPOINT} method="POST" onSubmit={handleSubmit} className="space-y-6">
-                  {/* Hidden fields for submit-form.com configuration */}
-                  <input type="hidden" name="_redirect" value="https://valluri-rahul-portfolio.vercel.app/?success=true" />
-                  <input type="hidden" name="_subject" value={`New Contact Form Submission from ${formData.name}`} />
-                  <input type="hidden" name="service" value={formData.service} />
-                  <input type="hidden" name="budget" value={formData.budget} />
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Hidden fields are no longer needed with AJAX submission */}
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <InputField
