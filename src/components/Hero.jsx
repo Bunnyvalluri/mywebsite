@@ -2,8 +2,6 @@ import { motion } from 'framer-motion';
 import { FaReact, FaNodeJs, FaJs, FaBootstrap, FaDownload, FaArrowRight } from 'react-icons/fa';
 import { SiJquery } from 'react-icons/si';
 import TypingEffect from './TypingEffect';
-import ParticleBackground from './ParticleBackground';
-import CodeRain from './CodeRain';
 
 const Hero = () => {
   return (
