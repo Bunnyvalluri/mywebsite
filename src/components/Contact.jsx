@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaLinkedin, FaGithub, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaCheckCircle, FaInstagram, FaTerminal, FaCode, FaTimes, FaPhoneAlt } from 'react-icons/fa';
 
-// Form submission endpoint - Internal API
-// Sends emails directly to: codewithrahul23@gmail.com
-const FORM_ENDPOINT = '/api/contact';
+// Form submission endpoint - Formspark
+// ID: RRB6NqsxA
+const FORM_ENDPOINT = 'https://submit-form.com/RRB6NqsxA';
 
 
 const Contact = () => {
@@ -45,24 +45,29 @@ const Contact = () => {
         message: formData.message,
       };
 
-      // Submit via AJAX to internal API
+      // Submit via AJAX to Formspark
       const response = await fetch(FORM_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          ...payload,
+          _email: {
+            subject: `New Contact Form Submission from ${formData.name}`,
+            from: formData.email,
+          }
+        }),
       });
 
-      const result = await response.json();
-
-      if (response.ok && result.success) {
+      if (response.ok) {
         // Success! Show popup immediately
         setFormData({ name: '', email: '', service: 'Full Stack Dev', budget: '$1k - $5k', message: '' });
         setShowPopup(true);
         setTimeout(() => setShowPopup(false), 5000);
       } else {
-        throw new Error(result.error || 'Submission failed');
+        throw new Error('Submission failed');
       }
     } catch (error) {
       console.error('Form submission error:', error);

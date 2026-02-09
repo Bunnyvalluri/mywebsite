@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import { FiMail, FiPhone, FiMapPin, FiSend, FiGithub, FiLinkedin, FiTwitter, FiCheckCircle } from 'react-icons/fi';
 import { SpotlightCard, ShimmerButton } from './AnimatedComponents';
 
-// Form submission endpoint - Internal API
-const FORM_ENDPOINT = '/api/contact';
+// Form submission endpoint - Formspark
+const FORM_ENDPOINT = 'https://submit-form.com/RRB6NqsxA';
 
 
 const EnhancedContact = () => {
@@ -67,18 +67,23 @@ const EnhancedContact = () => {
         message: formData.message,
       };
 
-      // Submit via AJAX to internal API
+      // Submit via AJAX to Formspark
       const response = await fetch(FORM_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          ...payload,
+          _email: {
+            subject: formData.subject || `New Contact Form Submission from ${formData.name}`,
+            from: formData.email,
+          }
+        }),
       });
 
-      const result = await response.json();
-
-      if (response.ok && result.success) {
+      if (response.ok) {
         setIsSubmitting(false);
         setIsSubmitted(true);
 
@@ -88,7 +93,7 @@ const EnhancedContact = () => {
           setFormData({ name: '', email: '', subject: '', message: '' });
         }, 3000);
       } else {
-        throw new Error(result.error || 'Submission failed');
+        throw new Error('Submission failed');
       }
     } catch (error) {
       console.error('Form submission error:', error);
