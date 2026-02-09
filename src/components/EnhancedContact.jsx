@@ -58,22 +58,18 @@ const EnhancedContact = () => {
     setIsSubmitting(true);
 
     try {
-      // Prepare form data for submission
-      const formPayload = {
-        name: formData.name,
-        email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
-        _subject: `${formData.subject} - from ${formData.name}`,
-      };
+      // Prepare form data using FormData (required by submit-form.com)
+      const formPayload = new FormData();
+      formPayload.append('name', formData.name);
+      formPayload.append('email', formData.email);
+      formPayload.append('subject', formData.subject);
+      formPayload.append('message', formData.message);
+      formPayload.append('_subject', `${formData.subject} - from ${formData.name}`);
 
       // Submit to form endpoint
       const response = await fetch(FORM_ENDPOINT, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formPayload),
+        body: formPayload,
       });
 
       if (response.ok) {
@@ -86,7 +82,8 @@ const EnhancedContact = () => {
           setFormData({ name: '', email: '', subject: '', message: '' });
         }, 3000);
       } else {
-        throw new Error('Failed to send message');
+        const errorText = await response.text();
+        throw new Error(errorText || 'Failed to send message');
       }
     } catch (error) {
       console.error('Form submission error:', error);

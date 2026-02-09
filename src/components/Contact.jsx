@@ -36,23 +36,19 @@ const Contact = () => {
     setErrorMessage('');
 
     try {
-      // Prepare form data for submission
-      const formPayload = {
-        name: formData.name,
-        email: formData.email,
-        service: formData.service,
-        budget: formData.budget,
-        message: formData.message,
-        _subject: `New Contact Form Submission from ${formData.name}`,
-      };
+      // Prepare form data using FormData (required by submit-form.com)
+      const formPayload = new FormData();
+      formPayload.append('name', formData.name);
+      formPayload.append('email', formData.email);
+      formPayload.append('service', formData.service);
+      formPayload.append('budget', formData.budget);
+      formPayload.append('message', formData.message);
+      formPayload.append('_subject', `New Contact Form Submission from ${formData.name}`);
 
       // Submit to form endpoint
       const response = await fetch(FORM_ENDPOINT, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formPayload),
+        body: formPayload,
       });
 
       if (response.ok) {
@@ -61,7 +57,8 @@ const Contact = () => {
         setShowPopup(true);
         setTimeout(() => setShowPopup(false), 5000);
       } else {
-        throw new Error('Failed to send message');
+        const errorText = await response.text();
+        throw new Error(errorText || 'Failed to send message');
       }
     } catch (error) {
       console.error('Form submission error:', error);
