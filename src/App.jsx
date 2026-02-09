@@ -26,6 +26,7 @@ const Testimonials = lazy(() => import('./components/Testimonials'));
 const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
 const LiveChat = lazy(() => import('./components/LiveChat'));
+const SuccessNotification = lazy(() => import('./components/SuccessNotification'));
 
 
 // Enhanced lazy load components (commented out)
@@ -98,6 +99,10 @@ function App() {
 
       <Suspense fallback={null}>
         <LiveChat />
+      </Suspense>
+
+      <Suspense fallback={null}>
+        <SuccessNotification />
       </Suspense>
 
       <div className="relative z-10">
