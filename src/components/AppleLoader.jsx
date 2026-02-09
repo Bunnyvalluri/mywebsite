@@ -39,13 +39,7 @@ const AppleLoader = ({ onComplete }) => {
         </div>
 
         {/* Optional: Subtle Quote or Status */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.5 }}
-          className="mt-4 text-center text-xs font-mono text-[--color-secondary] tracking-widest uppercase"
-        >
-          Initializing Experience...
-        </motion.p>
+
       </div>
     </motion.div>
   );
