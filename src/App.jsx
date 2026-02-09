@@ -24,7 +24,7 @@ const Testimonials = lazy(() => import('./components/Testimonials'));
 const Contact = lazy(() => import('./components/Contact'));
 const Footer = lazy(() => import('./components/Footer'));
 const LiveChat = lazy(() => import('./components/LiveChat'));
-import AppleLoader from './components/AppleLoader';
+
 
 // Enhanced lazy load components (commented out)
 // const EnhancedHero = lazy(() => import('./components/EnhancedHero'));
@@ -35,7 +35,7 @@ import AppleLoader from './components/AppleLoader';
 const ThreeDCharacterShowcase = lazy(() => import('./components/ThreeDCharacterShowcase'));
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
       return localStorage.getItem('theme') === 'dark' ||
@@ -104,10 +104,7 @@ function App() {
   return (
     <div className="bg-[--color-background-custom] text-[--color-text-main] min-h-screen font-sans selection:bg-[--color-accent] selection:text-white transition-colors duration-300 relative overflow-hidden select-none">
 
-      {/* Loading Screen */}
-      <AnimatePresence>
-        {isLoading && <AppleLoader onComplete={() => setIsLoading(false)} />}
-      </AnimatePresence>
+
 
       {/* Simplified Background - Performance Optimized */}
       <div className="fixed inset-0 z-0 pointer-events-none">
