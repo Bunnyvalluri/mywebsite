@@ -16,10 +16,10 @@ const Contact = () => {
   // Professional service options
   const services = [
     "Full Stack Dev",
-    "Cybersecurity",
+    "Cyber Security",
     "Cloud Architecture",
     "AI/ML Integration",
-    "Mobile Development",
+    "Mobile Application",
     "DevOps",
     "UI/UX Design",
     "Blockchain"
@@ -117,7 +117,7 @@ const Contact = () => {
                 label="Location"
                 value="Hyderabad, India"
                 accentColor="bg-violet-500"
-                href="#"
+                href="https://www.google.com/maps/place/Hyderabad,+Telangana"
               />
               <ContactCard
                 icon={<FaPhoneAlt />}
@@ -181,12 +181,14 @@ const Contact = () => {
                       {services.map(s => {
                         // Color mapping for each service
                         const serviceColors = {
-                          'Full Stack Dev': { bg: 'bg-gradient-to-r from-indigo-600 to-blue-600', border: 'border-indigo-600', shadow: 'shadow-indigo-500/30', hover: 'hover:border-indigo-500/50' },
-                          'Cybersecurity': { bg: 'bg-gradient-to-r from-rose-600 to-red-600', border: 'border-rose-600', shadow: 'shadow-rose-500/30', hover: 'hover:border-rose-500/50' },
-                          'Cloud Architecture': { bg: 'bg-gradient-to-r from-sky-500 to-blue-600', border: 'border-sky-500', shadow: 'shadow-sky-500/30', hover: 'hover:border-sky-500/50' },
-                          'AI/ML Integration': { bg: 'bg-gradient-to-r from-fuchsia-600 to-purple-600', border: 'border-fuchsia-600', shadow: 'shadow-fuchsia-500/30', hover: 'hover:border-fuchsia-500/50' },
-                          'Blockchain': { bg: 'bg-gradient-to-r from-amber-500 to-orange-600', border: 'border-amber-500', shadow: 'shadow-amber-500/30', hover: 'hover:border-amber-500/50' },
-                          'DevOps': { bg: 'bg-gradient-to-r from-teal-500 to-emerald-600', border: 'border-teal-500', shadow: 'shadow-teal-500/30', hover: 'hover:border-teal-500/50' }
+                          'Full Stack Dev': { bg: 'bg-gradient-to-r from-blue-600 to-indigo-600', border: 'border-blue-600', shadow: 'shadow-blue-500/30', hover: 'hover:border-blue-500/50' },
+                          'Cyber Security': { bg: 'bg-gradient-to-r from-red-600 to-rose-600', border: 'border-red-600', shadow: 'shadow-red-500/30', hover: 'hover:border-red-500/50' },
+                          'Cloud Architecture': { bg: 'bg-gradient-to-r from-cyan-500 to-blue-600', border: 'border-cyan-500', shadow: 'shadow-cyan-500/30', hover: 'hover:border-cyan-500/50' },
+                          'AI/ML Integration': { bg: 'bg-gradient-to-r from-purple-600 to-violet-600', border: 'border-purple-600', shadow: 'shadow-purple-500/30', hover: 'hover:border-purple-500/50' },
+                          'Mobile Application': { bg: 'bg-gradient-to-r from-orange-500 to-pink-600', border: 'border-orange-500', shadow: 'shadow-orange-500/30', hover: 'hover:border-orange-500/50' },
+                          'DevOps': { bg: 'bg-gradient-to-r from-emerald-500 to-green-600', border: 'border-emerald-500', shadow: 'shadow-emerald-500/30', hover: 'hover:border-emerald-500/50' },
+                          'UI/UX Design': { bg: 'bg-gradient-to-r from-pink-500 to-rose-500', border: 'border-pink-500', shadow: 'shadow-pink-500/30', hover: 'hover:border-pink-500/50' },
+                          'Blockchain': { bg: 'bg-gradient-to-r from-amber-500 to-orange-500', border: 'border-amber-500', shadow: 'shadow-amber-500/30', hover: 'hover:border-amber-500/50' }
                         };
                         const colors = serviceColors[s] || { bg: 'bg-gradient-to-r from-blue-600 to-indigo-600', border: 'border-blue-600', shadow: 'shadow-blue-500/30', hover: 'hover:border-blue-500/50' };
 
@@ -324,6 +326,8 @@ const ContactCard = ({ icon, label, value, href, accentColor }) => {
   return (
     <a
       href={href}
+      target={href.startsWith('http') ? '_blank' : undefined}
+      rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
       className="flex items-center gap-4 p-4 rounded-xl bg-[--color-surface] border border-[--color-border-custom] hover:border-blue-500/30 hover:shadow-lg transition-all duration-300 group"
     >
       <div
