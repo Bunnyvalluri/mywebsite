@@ -69,6 +69,14 @@ Here is a detailed guide to the project files located in `src/`:
     npm run build
     ```
 
+## ⚙️ Configuration
+
+### Contact Form
+The contact form is configured to use **Formspark**.
+- **Endpoint**: `https://submit-form.com/YOUR_FORM_ID`
+- **Location**: `src/components/Contact.jsx` and `src/components/EnhancedContact.jsx`
+- **Current ID**: `RRB6NqsxA`
+
 ## 🎨 Features Highlights
 
 *   **Dark/Light Mode**: Fully supported with a dedicated toggle.
