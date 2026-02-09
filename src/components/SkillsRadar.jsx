@@ -130,9 +130,9 @@ const SkillsRadar = () => {
               key={i}
               className="absolute text-sm font-semibold text-[--color-text-main]"
               style={{
-                left: (size === 300 ? x + 50 : x), // Offset for container padding
-                top: (size === 300 ? y + 50 : y),
-                transform: 'translate(-50%, -50%)'
+                left: `${(x / size) * 100}%`,
+                top: `${(y / size) * 100}%`,
+                transform: 'translate(-50%, -50%)' // Center the label itself
               }}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}

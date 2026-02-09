@@ -107,33 +107,33 @@ const Hero = () => {
         </div>
 
         {/* Right Content - Simplified 3D Visualization */}
-        <div className="hidden md:flex w-2/5 h-[600px] items-center justify-center relative">
-          <div className="relative w-[500px] h-[500px] flex items-center justify-center perspective-container">
+        <div className="flex w-full md:w-2/5 h-[400px] md:h-[600px] items-center justify-center relative mt-12 md:mt-0">
+          <div className="relative w-[300px] md:w-[500px] h-[300px] md:h-[500px] flex items-center justify-center perspective-container transform scale-75 md:scale-100">
 
             {/* Central Core - Static Glow */}
-            <div className="absolute w-40 h-40 bg-gradient-to-br from-indigo-500/30 to-purple-600/30 rounded-full blur-3xl opacity-40 z-0" />
+            <div className="absolute w-24 md:w-40 h-24 md:h-40 bg-gradient-to-br from-indigo-500/30 to-purple-600/30 rounded-full blur-3xl opacity-40 z-0" />
 
-            <div className="relative z-10 w-32 h-32 glass-strong rounded-3xl border-2 border-[--color-accent]/50 flex items-center justify-center shadow-2xl">
-              <span className="text-5xl font-black gradient-text">&lt;/&gt;</span>
+            <div className="relative z-10 w-24 md:w-32 h-24 md:h-32 glass-strong rounded-3xl border-2 border-[--color-accent]/50 flex items-center justify-center shadow-2xl">
+              <span className="text-3xl md:text-5xl font-black gradient-text">&lt;/&gt;</span>
             </div>
 
             {/* Orbit Ring 1 - React & Frontend - Slower Animation */}
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-              className="absolute w-72 h-72 border-2 border-indigo-500/20 rounded-full flex items-center justify-center"
+              className="absolute w-56 md:w-72 h-56 md:h-72 border-2 border-indigo-500/20 rounded-full flex items-center justify-center"
             >
               <motion.div
-                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4 glass-strong rounded-2xl shadow-xl border border-blue-500/30"
+                className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 md:p-4 glass-strong rounded-2xl shadow-xl border border-blue-500/30"
                 whileHover={{ scale: 1.2 }}
               >
-                <FaReact className="text-3xl text-[#61DAFB]" />
+                <FaReact className="text-2xl md:text-3xl text-[#61DAFB]" />
               </motion.div>
               <motion.div
-                className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 p-4 glass-strong rounded-2xl shadow-xl border border-yellow-500/30"
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 p-3 md:p-4 glass-strong rounded-2xl shadow-xl border border-yellow-500/30"
                 whileHover={{ scale: 1.2 }}
               >
-                <FaJs className="text-3xl text-[#F7DF1E]" />
+                <FaJs className="text-2xl md:text-3xl text-[#F7DF1E]" />
               </motion.div>
             </motion.div>
 
@@ -141,7 +141,7 @@ const Hero = () => {
             <motion.div
               animate={{ rotate: -360 }}
               transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-              className="absolute w-[28rem] h-[28rem] border-2 border-purple-500/20 rounded-full flex items-center justify-center"
+              className="absolute w-[20rem] md:w-[28rem] h-[20rem] md:h-[28rem] border-2 border-purple-500/20 rounded-full flex items-center justify-center"
             >
               <motion.div
                 className="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 p-4 glass-strong rounded-2xl shadow-xl border border-green-500/30"
