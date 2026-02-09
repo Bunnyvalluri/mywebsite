@@ -15,7 +15,6 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
 
   // Professional service options
   const services = [
@@ -33,7 +32,6 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setErrorMessage('');
 
     try {
       // Prepare form data using FormData (required by submit-form.com)
@@ -58,11 +56,12 @@ const Contact = () => {
         setTimeout(() => setShowPopup(false), 5000);
       } else {
         const errorText = await response.text();
-        throw new Error(errorText || 'Failed to send message');
+        console.error('Form submission failed:', errorText);
+        alert('Failed to send message. Please try again or email me directly at codewithrahul23@gmail.com');
       }
     } catch (error) {
       console.error('Form submission error:', error);
-      setErrorMessage(error.message || 'Failed to send message. Please try again or email me directly at codewithrahul23@gmail.com');
+      alert('Failed to send message. Please try again or email me directly at codewithrahul23@gmail.com');
     } finally {
       setIsSubmitting(false);
     }
@@ -245,17 +244,6 @@ const Contact = () => {
                       placeholder="Tell me about your project goals and timeline..."
                     ></textarea>
                   </div>
-
-                  {/* Error Message Display */}
-                  {errorMessage && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-500 text-sm"
-                    >
-                      <p className="font-semibold">⚠️ {errorMessage}</p>
-                    </motion.div>
-                  )}
 
                   <button
                     type="submit"
