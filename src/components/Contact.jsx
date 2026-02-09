@@ -181,14 +181,14 @@ const Contact = () => {
                       {services.map(s => {
                         // Color mapping for each service
                         const serviceColors = {
-                          'Full Stack Dev': { bg: 'bg-blue-600', border: 'border-blue-600', shadow: 'shadow-blue-500/30', hover: 'hover:border-blue-500/50' },
-                          'Cybersecurity': { bg: 'bg-red-600', border: 'border-red-600', shadow: 'shadow-red-500/30', hover: 'hover:border-red-500/50' },
-                          'Cloud Architecture': { bg: 'bg-cyan-600', border: 'border-cyan-600', shadow: 'shadow-cyan-500/30', hover: 'hover:border-cyan-500/50' },
-                          'AI/ML Integration': { bg: 'bg-purple-600', border: 'border-purple-600', shadow: 'shadow-purple-500/30', hover: 'hover:border-purple-500/50' },
-                          'Blockchain': { bg: 'bg-orange-600', border: 'border-orange-600', shadow: 'shadow-orange-500/30', hover: 'hover:border-orange-500/50' },
-                          'DevOps': { bg: 'bg-green-600', border: 'border-green-600', shadow: 'shadow-green-500/30', hover: 'hover:border-green-500/50' }
+                          'Full Stack Dev': { bg: 'bg-gradient-to-r from-indigo-600 to-blue-600', border: 'border-indigo-600', shadow: 'shadow-indigo-500/30', hover: 'hover:border-indigo-500/50' },
+                          'Cybersecurity': { bg: 'bg-gradient-to-r from-rose-600 to-red-600', border: 'border-rose-600', shadow: 'shadow-rose-500/30', hover: 'hover:border-rose-500/50' },
+                          'Cloud Architecture': { bg: 'bg-gradient-to-r from-sky-500 to-blue-600', border: 'border-sky-500', shadow: 'shadow-sky-500/30', hover: 'hover:border-sky-500/50' },
+                          'AI/ML Integration': { bg: 'bg-gradient-to-r from-fuchsia-600 to-purple-600', border: 'border-fuchsia-600', shadow: 'shadow-fuchsia-500/30', hover: 'hover:border-fuchsia-500/50' },
+                          'Blockchain': { bg: 'bg-gradient-to-r from-amber-500 to-orange-600', border: 'border-amber-500', shadow: 'shadow-amber-500/30', hover: 'hover:border-amber-500/50' },
+                          'DevOps': { bg: 'bg-gradient-to-r from-teal-500 to-emerald-600', border: 'border-teal-500', shadow: 'shadow-teal-500/30', hover: 'hover:border-teal-500/50' }
                         };
-                        const colors = serviceColors[s] || { bg: 'bg-blue-600', border: 'border-blue-600', shadow: 'shadow-blue-500/30', hover: 'hover:border-blue-500/50' };
+                        const colors = serviceColors[s] || { bg: 'bg-gradient-to-r from-blue-600 to-indigo-600', border: 'border-blue-600', shadow: 'shadow-blue-500/30', hover: 'hover:border-blue-500/50' };
 
                         return (
                           <button
@@ -196,8 +196,8 @@ const Contact = () => {
                             type="button"
                             onClick={() => setFormData({ ...formData, service: s })}
                             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 border-2 shadow-sm ${formData.service === s
-                                ? `${colors.bg} ${colors.border} text-white shadow-lg ${colors.shadow} scale-105`
-                                : `bg-[--color-background-custom] ${colors.border} text-[--color-text-secondary] ${colors.hover} hover:shadow-md`
+                              ? `${colors.bg} ${colors.border} text-white shadow-lg ${colors.shadow} scale-105`
+                              : `bg-[--color-background-custom] ${colors.border} text-[--color-text-secondary] ${colors.hover} hover:shadow-md`
                               }`}
                           >
                             {s}
