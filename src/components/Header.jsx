@@ -52,8 +52,8 @@ const Header = ({ darkMode, toggleTheme }) => {
 
   return (
     <header className={`fixed top-0 w-full z-[9999] transition-all duration-300 ${scrolled
-        ? 'bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/10 shadow-lg'
-        : 'bg-transparent'
+      ? 'bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/10 shadow-lg'
+      : 'bg-transparent'
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
@@ -82,8 +82,8 @@ const Header = ({ darkMode, toggleTheme }) => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className={`text-sm font-medium transition-colors duration-300 relative group cursor-pointer ${activeSection === link.href.substring(1)
-                    ? 'text-white'
-                    : 'text-gray-400 hover:text-white'
+                  ? 'text-white'
+                  : 'text-gray-400 hover:text-white'
                   }`}
               >
                 {link.name}
@@ -125,17 +125,17 @@ const Header = ({ darkMode, toggleTheme }) => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#0a0a0a] border-b border-white/10 overflow-hidden shadow-2xl"
+            className="md:hidden bg-[--color-background-custom]/95 backdrop-blur-xl border-b border-[--color-border-custom] overflow-hidden shadow-2xl"
           >
-            <div className="px-4 py-6 space-y-4">
+            <div className="px-4 py-8 space-y-6">
               {links.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={handleNavClick}
                   className={`block text-lg font-medium transition-colors cursor-pointer ${activeSection === link.href.substring(1)
-                      ? 'text-indigo-400 pl-2 border-l-2 border-indigo-500'
-                      : 'text-gray-400 hover:text-white'
+                    ? 'text-indigo-400 pl-2 border-l-2 border-indigo-500'
+                    : 'text-gray-400 hover:text-white'
                     }`}
                 >
                   {link.name}
